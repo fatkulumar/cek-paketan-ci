@@ -32,7 +32,32 @@ class User extends CI_Controller {
 		$this->output->delete_cache();
 		// $data["table"] = 'user/table';
 		// $data["grafik"] = 'user/grafik'; 
-		$data['data_asc'] = $this->m_paket->tampil_data_asc();
+		$data['nama_paket'] = $this->m_paket->grafikNamaPaket()->result_array();
+		$data['data_asc'] = $this->m_paket->tampil_data_asc(); 
+		$data['hitungCod'] = $this->m_paket->hitungCod();
+		$data['hitungLangsung'] = $this->m_paket->hitungLangsung();
 		$this->load->view('user/index', $data);
+	}
+
+	public function grafikNamaPaket()
+	{
+		$data['nama_paket'] = $this->m_paket->grafikNamaPaket()->result_array();
+		foreach($data['nama_paket'] as $row){
+
+			// $jenis=$row['jenis_kirim'];
+			$data['cod']=$this->db
+			->select('nama_paket,jenis_kirim, count(*) as jumlah_cod')
+			->group_by('nama_paket')
+			->get_where('tb_paket',['jenis_kirim'=> "COD"])->result_array();
+
+			$data['langsung']=$this->db
+			->select('nama_paket,jenis_kirim, count(*) as jumlah_langsung')
+			->group_by('nama_paket')
+			->get_where('tb_paket',['jenis_kirim'=> "langsung"])->result_array();
+		}
+
+		$data['jumlah_nama_paket'] = $this->m_paket->grafikNamaPaket()->num_rows();
+
+		echo json_encode($data);
 	}
 }

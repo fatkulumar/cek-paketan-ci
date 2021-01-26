@@ -28,6 +28,8 @@
   <!-- Template Main CSS File -->
   <link href="<?= base_url('assets/css/style_copy3.css') ?>" rel="stylesheet">
 
+  <script src="<?= base_url('assets/vendor/jquery/jquery.min.js') ?>"></script>
+
   <!-- =======================================================
   * Template Name: Bethany - v2.2.0
   * Template URL: https://bootstrapmade.com/bethany-free-onepage-bootstrap-theme/
@@ -110,7 +112,7 @@
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="<?= base_url('assets/vendor/jquery/jquery.min.js') ?>"></script>
+  <!-- <script src="<?= base_url('assets/vendor/jquery/jquery.min.js') ?>"></script> -->
   <script src="<?= base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
   <script src="<?= base_url('assets/vendor/jquery.easing/jquery.easing.min.js') ?>"></script>
   <script src="<?= base_url('assets/vendor/php-email-form/validate.js') ?>"></script>

@@ -35,6 +35,27 @@
         {
             $this->db->update($table, $data, ["id_paket" => $id]);
         }
+
+        function hitungCod()
+        {
+            return $this->db->get_where($this->table, ['jenis_kirim' => 'COD'])->num_rows();
+        }
+
+        function hitungLangsung()
+        {
+            return $this->db->get_where($this->table, ['jenis_kirim' => 'Langsung'])->num_rows();
+        }
+
+        function grafikNamaPaket()
+        {
+            return $query = $this->db
+            ->select('nama_paket,jenis_kirim, count(*) as jumlah')
+            ->group_by('nama_paket')
+            ->get($this->table);
+
+            //dadi siji kene g iso a
+        
+        }
     }
 
 ?>  

@@ -1,21 +1,30 @@
 <script src="assets/highcharts/code/highcharts.js"></script>
 
+    <?php
+        $data = [
+            'name' => 'John',
+            'data' => [5],
+            'stack' => 'male'
+        ];
+        echo json_encode($data);
+    ?>
+
     <section id="counts" class="counts bg-success">
       <div class="container ">
 
         <div class="row counters">
 
-          <div class="col-lg-3 col-6 text-center">
-            <span data-toggle="counter-up">232</span>
-            <p>Clients</p>
+          <div class="col-lg-6 col-6 text-center">
+            <span data-toggle="counter-up"><?= $hitungCod ?></span>
+            <p>COD</p>
           </div>
 
-          <div class="col-lg-3 col-6 text-center">
-            <span data-toggle="counter-up">521</span>
-            <p>Projects</p>
+          <div class="col-lg-6 col-6 text-center">
+            <span data-toggle="counter-up"><?= $hitungLangsung ?></span>
+            <p>Langsung</p>
           </div>
 
-          <div class="col-lg-3 col-6 text-center">
+          <!-- <div class="col-lg-3 col-6 text-center">
             <span data-toggle="counter-up">1,463</span>
             <p>Hours Of Support</p>
           </div>
@@ -23,7 +32,7 @@
           <div class="col-lg-3 col-6 text-center">
             <span data-toggle="counter-up">15</span>
             <p>Hard Workers</p>
-          </div>
+          </div> -->
 
         </div>
 
@@ -51,227 +60,270 @@
     </div>
 </div>
 
-
 <script>
+$().ready(function() {
+
+
+    $.getJSON('http://'+ window.location.host +'/cek-paketan-ci/user/grafikNamaPaket', function(data) {
+        var nama_paket = data.nama_paket
+        var langsung = data.langsung
+        var cod = data.cod
+        var nama_paketan = []
+        var jumlah = []
+        var jenis_kirim = []
+        var jumlah_kirim_cod = []
+        var jumlah_kirim_langsung = []
+
+
+        $(langsung).each(function(ia){
+            jumlah_kirim_langsung.push(langsung[ia].jumlah_langsung);
+        })
+        $(cod).each(function(i){
+            jumlah_kirim_cod.push(cod[i].jumlah_cod);
+        })
+        $(nama_paket).each(function(i){
+            nama_paketan.push(nama_paket[i].nama_paket);
+            jumlah.push(parseFloat(nama_paket[i].jumlah));
+            jenis_kirim.push(nama_paket[i].jenis_kirim);
+        })
+    //    alert(jumlah_kirim_langsung.length);
+       var jml_langsung = jumlah_kirim_langsung.length
+       var jml_cod = jumlah_kirim_cod.length
     //grafik nama paketan
-    Highcharts.chart('nama_paketan', {
+        // alert(jumlah)
+        Highcharts.chart('nama_paketan', {
 
-        chart: {
-        type: 'line'
-        },
+            chart: {
+            type: 'line'
+            },
 
-        title: {
-        text: 'Total fruit consumtion, grouped by gender'
-        },
+            title: {
+            text: 'Paketan'
+            },
 
-        xAxis: {
-        categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
-        },
+            xAxis: {
+            categories: nama_paketan
+            },
 
-        yAxis: {
-        allowDecimals: false,
-        min: 0,
-        title: {
-            text: 'Number of fruits'
-        }
-        },
+            yAxis: {
+            allowDecimals: false,
+            min: 0,
+            title: {
+                text: 'Jumlah Paketan'
+            }
+            },
 
-        tooltip: {
-        formatter: function () {
-            return '<b>' + this.x + '</b><br/>' +
-            this.series.name + ': ' + this.y + '<br/>' +
-            'Total: ' + this.point.stackTotal;
-        }
-        },
+            tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>Total Paketan: ' + this.y + '<br/>' +
+                // this.series.name + ': ' + this.y + '<br/>' +
+                // 'Total: ' + this.point.stackTotal + 
+                '<br>' +'Langsung:' + jumlah_kirim_langsung + '<br>' +'COD:' + jumlah_kirim_cod;
+            }
+            },
 
-        plotOptions: {
-        column: {
-            stacking: 'normal'
-        }
-        },
+            plotOptions: {
+            column: {
+                stacking: 'normal'
+            }
+            },
+            
+            series: [
+            {
+                name: 'Paketan',
+                data: jumlah,
+            },
+            //  {
+            // name: 'Joe',
+            // data: [3, 4, 4, 2, 5],
+            // stack: 'male'
+            // }, {
+            // name: 'Jane',
+            // data: [2, 5, 6, 2, 1],
+            // stack: 'female'
+            // }, {
+            // name: 'Janet',
+            // data: [3, 0, 4, 4, 3],
+            // stack: 'female'
+            // }
+        ]
+        });
+        //grafik jenis kirim
+        Highcharts.chart('jenis_kirim', {
 
-        series: [{
-        name: 'John',
-        data: [5, 3, 4, 7, 2],
-        stack: 'male'
-        }, {
-        name: 'Joe',
-        data: [3, 4, 4, 2, 5],
-        stack: 'male'
-        }, {
-        name: 'Jane',
-        data: [2, 5, 6, 2, 1],
-        stack: 'female'
-        }, {
-        name: 'Janet',
-        data: [3, 0, 4, 4, 3],
-        stack: 'female'
-        }]
+            chart: {
+            type: 'column'
+            },
+
+            title: {
+            text: 'Jumlah Jenis Kirim'
+            },
+
+            xAxis: {
+            categories: ['Langsung', 'COD']
+            },
+
+            yAxis: {
+            allowDecimals: false,
+            min: 0,
+            title: {
+                text: 'Jumlah Jenis Kirim'
+            }
+            },
+
+            tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>' +
+                this.series.name + ': ' + this.y + '<br/>' +
+                'Total: ' + this.point.stackTotal;
+            }
+            },
+
+            plotOptions: {
+            column: {
+                stacking: 'normal'
+            }
+            },
+
+            series: [
+                {
+            name: 'Langsung',
+            data: [jml_langsung, jml_cod],
+            stack: 'male'
+            }, 
+            {
+            name: 'COD',
+            data: [jml_cod],
+            stack: 'male'
+            },
+            //  {
+            // name: 'Jane',
+            // data: [2, 5, 6, 2, 1],
+            // stack: 'female'
+            // }, {
+            // name: 'Janet',
+            // data: [3, 0, 4, 4, 3],
+            // stack: 'female'
+            // }
+        ]
+        });
+        //grafik duta paket
+        Highcharts.chart('duta_paket', {
+
+            chart: {
+            type: 'pie'
+            },
+
+            title: {
+            text: 'Duta Paketan'
+            },
+
+            xAxis: {
+            categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+            },
+
+            yAxis: {
+            allowDecimals: false,
+            min: 0,
+            title: {
+                text: 'Number of fruits'
+            }
+            },
+
+            tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>' +
+                this.series.name + ': ' + this.y + '<br/>' +
+                'Total: ' + this.point.stackTotal;
+            }
+            },
+
+            plotOptions: {
+            column: {
+                stacking: 'normal'
+            }
+            },
+
+            series: [
+                {
+            name: nama_paket,
+            data: jumlah,
+            stack: 'male'
+            },
+            //  {
+            // name: 'Joe',
+            // data: [3, 4, 4, 2, 5],
+            // stack: 'male'
+            // }, {
+            // name: 'Jane',
+            // data: [2, 5, 6, 2, 1],
+            // stack: 'female'
+            // }, {
+            // name: 'Janet',
+            // data: [3, 0, 4, 4, 3],
+            // stack: 'female'
+            // }
+        ]
+        });
+
+        //grafik duta peneruma
+        Highcharts.chart('duta_penerima', {
+
+            chart: {
+            type: 'pie'
+            },
+
+            title: {
+            text: 'Total fruit consumtion, grouped by gender'
+            },
+
+            xAxis: {
+            categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+            },
+
+            yAxis: {
+            allowDecimals: false,
+            min: 0,
+            title: {
+                text: 'Number of fruits'
+            }
+            },
+
+            tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>' +
+                this.series.name + ': ' + this.y + '<br/>' +
+                'Total: ' + this.point.stackTotal;
+            }
+            },
+
+            plotOptions: {
+            column: {
+                stacking: 'normal'
+            }
+            },
+
+            series: [
+               
+            {
+            name: 'John',
+            data: [5, 3, 4, 7, 2],
+            stack: 'male'
+            }, {
+            name: 'Joe',
+            data: [3, 4, 4, 2, 5],
+            stack: 'male'
+            }, {
+            name: 'Jane',
+            data: [2, 5, 6, 2, 1],
+            stack: 'female'
+            }, {
+            name: 'Janet',
+            data: [3, 0, 4, 4, 3],
+            stack: 'female'
+            }
+        ]
+        });
     });
-    //grafik jenis kirim
-    Highcharts.chart('jenis_kirim', {
-
-        chart: {
-        type: 'column'
-        },
-
-        title: {
-        text: 'Total fruit consumtion, grouped by gender'
-        },
-
-        xAxis: {
-        categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
-        },
-
-        yAxis: {
-        allowDecimals: false,
-        min: 0,
-        title: {
-            text: 'Number of fruits'
-        }
-        },
-
-        tooltip: {
-        formatter: function () {
-            return '<b>' + this.x + '</b><br/>' +
-            this.series.name + ': ' + this.y + '<br/>' +
-            'Total: ' + this.point.stackTotal;
-        }
-        },
-
-        plotOptions: {
-        column: {
-            stacking: 'normal'
-        }
-        },
-
-        series: [{
-        name: 'John',
-        data: [5, 3, 4, 7, 2],
-        stack: 'male'
-        }, {
-        name: 'Joe',
-        data: [3, 4, 4, 2, 5],
-        stack: 'male'
-        }, {
-        name: 'Jane',
-        data: [2, 5, 6, 2, 1],
-        stack: 'female'
-        }, {
-        name: 'Janet',
-        data: [3, 0, 4, 4, 3],
-        stack: 'female'
-        }]
-    });
-    //grafik duta paket
-    Highcharts.chart('duta_paket', {
-
-        chart: {
-        type: 'pie'
-        },
-
-        title: {
-        text: 'Total fruit consumtion, grouped by gender'
-        },
-
-        xAxis: {
-        categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
-        },
-
-        yAxis: {
-        allowDecimals: false,
-        min: 0,
-        title: {
-            text: 'Number of fruits'
-        }
-        },
-
-        tooltip: {
-        formatter: function () {
-            return '<b>' + this.x + '</b><br/>' +
-            this.series.name + ': ' + this.y + '<br/>' +
-            'Total: ' + this.point.stackTotal;
-        }
-        },
-
-        plotOptions: {
-        column: {
-            stacking: 'normal'
-        }
-        },
-
-        series: [{
-        name: 'John',
-        data: [5, 3, 4, 7, 2],
-        stack: 'male'
-        }, {
-        name: 'Joe',
-        data: [3, 4, 4, 2, 5],
-        stack: 'male'
-        }, {
-        name: 'Jane',
-        data: [2, 5, 6, 2, 1],
-        stack: 'female'
-        }, {
-        name: 'Janet',
-        data: [3, 0, 4, 4, 3],
-        stack: 'female'
-        }]
-    });
-
-    //grafik duta peneruma
-    Highcharts.chart('duta_penerima', {
-
-chart: {
-type: 'pie'
-},
-
-title: {
-text: 'Total fruit consumtion, grouped by gender'
-},
-
-xAxis: {
-categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
-},
-
-yAxis: {
-allowDecimals: false,
-min: 0,
-title: {
-    text: 'Number of fruits'
-}
-},
-
-tooltip: {
-formatter: function () {
-    return '<b>' + this.x + '</b><br/>' +
-    this.series.name + ': ' + this.y + '<br/>' +
-    'Total: ' + this.point.stackTotal;
-}
-},
-
-plotOptions: {
-column: {
-    stacking: 'normal'
-}
-},
-
-series: [{
-name: 'John',
-data: [5, 3, 4, 7, 2],
-stack: 'male'
-}, {
-name: 'Joe',
-data: [3, 4, 4, 2, 5],
-stack: 'male'
-}, {
-name: 'Jane',
-data: [2, 5, 6, 2, 1],
-stack: 'female'
-}, {
-name: 'Janet',
-data: [3, 0, 4, 4, 3],
-stack: 'female'
-}]
-});
+})
 </script>
