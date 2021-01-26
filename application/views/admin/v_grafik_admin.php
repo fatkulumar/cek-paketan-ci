@@ -1,4 +1,4 @@
-<script src="assets/highcharts/code/highcharts.js"></script>
+<script src="<?= base_url('assets/highcharts/code/highcharts.js') ?>"></script>
 
     <section id="counts" class="counts bg-success">
       <div class="container ">
@@ -47,6 +47,10 @@
         <p class="font-italic">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
             magna aliqua.
+        </p>
+
+        <p>
+            <div class="alert alert-danger">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias quis quae, eius aliquid corrupti sint suscipit dolore eligendi possimus earum esse unde, provident doloribus perferendis, tempora autem debitis distinctio consequuntur!</div>
         </p>
     </div>
 </div>

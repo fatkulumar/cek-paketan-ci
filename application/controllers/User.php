@@ -18,8 +18,21 @@ class User extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	function __construct()
+	{
+		parent::__construct();		
+		$this->load->model('m_paket');
+		$this->load->helper('url');
+		// $this->load->library('form_validation');
+	}
+
 	public function index()
 	{
-		$this->load->view('user/index');
+		$this->output->delete_cache();
+		// $data["table"] = 'user/table';
+		// $data["grafik"] = 'user/grafik'; 
+		$data['data_asc'] = $this->m_paket->tampil_data_asc();
+		$this->load->view('user/index', $data);
 	}
 }
