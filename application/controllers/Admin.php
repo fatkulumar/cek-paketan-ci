@@ -30,6 +30,11 @@ class Admin extends CI_Controller {
 	public function index()
 	{
 		$this->output->delete_cache();
+		$data['nama_paket'] = $this->m_paket->grafikNamaPaket()->result_array();
+		$data['hitungCod'] = $this->m_paket->hitungCod();
+		$data['hitungLangsung'] = $this->m_paket->hitungLangsung();
+		$data['penerima'] = $this->m_paket->grafikPenerima()->result_array();
+
 		$data['data_asc'] = $this->m_paket->tampil_data_asc();
 		$data['data_desc'] = $this->m_paket->tampil_data_desc();
 		$this->load->view('admin/index', $data);

@@ -52,9 +52,14 @@
             ->select('nama_paket,jenis_kirim, count(*) as jumlah')
             ->group_by('nama_paket')
             ->get($this->table);
+        }
 
-            //dadi siji kene g iso a
-        
+        function grafikPenerima()
+        {
+            return $query = $this->db
+            ->select('penerima, count(*) as jumlah')
+            ->group_by('penerima')
+            ->get($this->table);
         }
     }
 

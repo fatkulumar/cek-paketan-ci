@@ -2,7 +2,10 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header bg-success"><strong><h1>SIMPAS LITE</strong></h1>
+                <div class="card-header bg-success">
+                    <strong>
+                        <h1>SIMPAS LITE</h1>
+                    </strong>
                 </div>
                 <div class="card-body">
 

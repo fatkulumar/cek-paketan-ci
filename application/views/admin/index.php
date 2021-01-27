@@ -32,6 +32,7 @@
 
   <link rel="stylesheet" href="<?= base_url('assets/datatable/css/dataTables.bootstrap4.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/datatable/css/jquery.dataTables.min.css') ?>">
+  
 
   <script src="<?= base_url('assets/vendor/jquery/jquery.min.js') ?>"></script>
 
@@ -89,7 +90,6 @@
           <div class="col-lg-12">
             <?php $this->load->view('admin/v_table_detail_admin') ?>
           </div>
-        </div>
       </div>
     </section><!-- End Hero -->
   <!-- <main> -->

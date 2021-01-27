@@ -4,8 +4,12 @@
     <div class="row">
         <div class="col-md-12 mt-2">
             <div class="card">
-                <div class="card-header bg-success"><strong><h1>SIMPAS LITE</strong></h1>
-                </div>
+                <div class="card-header bg-success">
+                    <strong>
+                        <h1 style="line-height: 0; padding-top: 30px;">SIMPAS LITE</h1>
+                        <!-- <h5 style="padding-top: 10px; color: white;">Sistem Informasi Paketan Gasek</h5> -->
+                    </strong>
+                </div> 
                 <div class="card-body">
 
                     <div class="table table-responsive">   

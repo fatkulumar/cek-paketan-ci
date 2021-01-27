@@ -7,7 +7,7 @@
 
   <title>SIMPAS - Index</title>
   <meta content="" name="description">
-  <meta content="" name="keywords">
+  <meta content="" name="keywords"> 
 
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
@@ -45,7 +45,7 @@
     <div class="container">
       <div class="header-container d-flex align-items-center">
         <div class="logo mr-auto bg-success">
-          <h1 class="text-light"><a href=""><span>SIMPAS</span></a></h1>
+          <h1 class="text-light"><a href=""><span><img src="<?= base_url('assets/img/apple-touch-icon.png') ?>" alt=""></span><br></a></h1>
           <!-- Uncomment below if you prefer to use an image logo -->
           <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>

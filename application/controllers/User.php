@@ -36,6 +36,8 @@ class User extends CI_Controller {
 		$data['data_asc'] = $this->m_paket->tampil_data_asc(); 
 		$data['hitungCod'] = $this->m_paket->hitungCod();
 		$data['hitungLangsung'] = $this->m_paket->hitungLangsung();
+		$data['penerima'] = $this->m_paket->grafikPenerima()->result_array();
+
 		$this->load->view('user/index', $data);
 	}
 
@@ -54,6 +56,7 @@ class User extends CI_Controller {
 			->select('nama_paket,jenis_kirim, count(*) as jumlah_langsung')
 			->group_by('nama_paket')
 			->get_where('tb_paket',['jenis_kirim'=> "langsung"])->result_array();
+			
 		}
 
 		$data['jumlah_nama_paket'] = $this->m_paket->grafikNamaPaket()->num_rows();

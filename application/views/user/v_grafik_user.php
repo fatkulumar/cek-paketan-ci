@@ -1,12 +1,27 @@
 <script src="assets/highcharts/code/highcharts.js"></script>
 
     <?php
-        $data = [
-            'name' => 'John',
-            'data' => [5],
-            'stack' => 'male'
-        ];
-        echo json_encode($data);
+        
+        $data = [];
+        foreach($nama_paket as $pk){
+            $nama = $pk["nama_paket"];
+            $jml = intval($pk["jumlah"]);
+            $data[] = [
+                'name' => $nama,
+                'y' => $jml,
+            ];
+        }
+
+        $data_penerima = [];
+        foreach($penerima as $pen){
+            $nama_penerima = $pen["penerima"];
+            $jumlah_penerima = intval($pen["jumlah"]);
+            $data_penerima[] = [
+                'name' => $nama_penerima,
+                'y' => $jumlah_penerima,
+            ];
+        }
+        
     ?>
 
     <section id="counts" class="counts bg-success">
@@ -128,11 +143,13 @@ $().ready(function() {
             }
             },
             
-            series: [
+            series: 
+            [
             {
                 name: 'Paketan',
                 data: jumlah,
             },
+
             //  {
             // name: 'Joe',
             // data: [3, 4, 4, 2, 5],
@@ -209,120 +226,134 @@ $().ready(function() {
         });
         //grafik duta paket
         Highcharts.chart('duta_paket', {
-
             chart: {
-            type: 'pie'
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
             },
-
             title: {
-            text: 'Duta Paketan'
+                text: 'Duta Paktean'
             },
-
-            xAxis: {
-            categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
-            },
-
-            yAxis: {
-            allowDecimals: false,
-            min: 0,
-            title: {
-                text: 'Number of fruits'
-            }
-            },
-
             tooltip: {
-            formatter: function () {
-                return '<b>' + this.x + '</b><br/>' +
-                this.series.name + ': ' + this.y + '<br/>' +
-                'Total: ' + this.point.stackTotal;
-            }
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
             },
-
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
             plotOptions: {
-            column: {
-                stacking: 'normal'
-            }
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
+                }
             },
-
-            series: [
-                {
-            name: nama_paket,
-            data: jumlah,
-            stack: 'male'
-            },
-            //  {
-            // name: 'Joe',
-            // data: [3, 4, 4, 2, 5],
-            // stack: 'male'
-            // }, {
-            // name: 'Jane',
-            // data: [2, 5, 6, 2, 1],
-            // stack: 'female'
-            // }, {
-            // name: 'Janet',
-            // data: [3, 0, 4, 4, 3],
-            // stack: 'female'
-            // }
-        ]
+            series: [{
+                name: 'Persentase',
+                colorByPoint: true,
+                data: <?php echo json_encode($data)?>
+            //     [
+                //     {
+                //     name: 'Chrome',
+                //     y: 61.41,
+                //     sliced: true,
+                //     selected: true
+                // }, 
+            //     {
+            //         name: 'Firefox',
+            //         y: 10.85
+            //     }, {
+            //         name: 'Edge',
+            //         y: 4.67
+            //     }, {
+            //         name: 'Safari',
+            //         y: 4.18
+            //     }, {
+            //         name: 'Sogou Explorer',
+            //         y: 1.64
+            //     }, {
+            //         name: 'Opera',
+            //         y: 1.6
+            //     }, {
+            //         name: 'QQ',
+            //         y: 1.2
+            //     }, {
+            //         name: 'Other',
+            //         y: 2.61
+            //     }
+            // ]
+            }]
         });
 
         //grafik duta peneruma
         Highcharts.chart('duta_penerima', {
-
             chart: {
-            type: 'pie'
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
             },
-
             title: {
-            text: 'Total fruit consumtion, grouped by gender'
+                text: 'Duta Penerima'
             },
-
-            xAxis: {
-            categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
-            },
-
-            yAxis: {
-            allowDecimals: false,
-            min: 0,
-            title: {
-                text: 'Number of fruits'
-            }
-            },
-
             tooltip: {
-            formatter: function () {
-                return '<b>' + this.x + '</b><br/>' +
-                this.series.name + ': ' + this.y + '<br/>' +
-                'Total: ' + this.point.stackTotal;
-            }
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
             },
-
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
             plotOptions: {
-            column: {
-                stacking: 'normal'
-            }
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
+                }
             },
-
-            series: [
-               
-            {
-            name: 'John',
-            data: [5, 3, 4, 7, 2],
-            stack: 'male'
-            }, {
-            name: 'Joe',
-            data: [3, 4, 4, 2, 5],
-            stack: 'male'
-            }, {
-            name: 'Jane',
-            data: [2, 5, 6, 2, 1],
-            stack: 'female'
-            }, {
-            name: 'Janet',
-            data: [3, 0, 4, 4, 3],
-            stack: 'female'
-            }
-        ]
+            series: [{
+                name: 'Persentase',
+                colorByPoint: true,
+                data: <?php echo json_encode($data_penerima)?>
+            //     [
+                //     {
+                //     name: 'Chrome',
+                //     y: 61.41,
+                //     sliced: true,
+                //     selected: true
+                // }, 
+            //     {
+            //         name: 'Firefox',
+            //         y: 10.85
+            //     }, {
+            //         name: 'Edge',
+            //         y: 4.67
+            //     }, {
+            //         name: 'Safari',
+            //         y: 4.18
+            //     }, {
+            //         name: 'Sogou Explorer',
+            //         y: 1.64
+            //     }, {
+            //         name: 'Opera',
+            //         y: 1.6
+            //     }, {
+            //         name: 'QQ',
+            //         y: 1.2
+            //     }, {
+            //         name: 'Other',
+            //         y: 2.61
+            //     }
+            // ]
+            }]
         });
     });
 })
