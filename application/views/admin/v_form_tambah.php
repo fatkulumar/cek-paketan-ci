@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="card">
-        <div class="card-header bg-success"><strong><h1>Tambah Data</strong></div>
+        <div class="card-header bg-success text-center"><strong><h1>Tambah Data</strong></div>
           <div class="card-body">
 
             <form class="mt-3 mb-3" action="<?= base_url('admin/tambah_aksi') ?>" method="POST">

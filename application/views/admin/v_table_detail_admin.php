@@ -2,8 +2,15 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header bg-success"><strong><h1>SIMPAS LITE</strong></h1>
+                <div style="line-height: 0; padding-top: 30px; margin: 0 0 10px 0; font-size: 48px;font-weight: 700;line-height: 56px;color: #fff;" class="card-header bg-success">
+                <!-- <strong><h1>SIMPAS LITE</strong></h1> -->
+                <strong>
+                        <h1 style="line-height: 0;font-size: 48px;font-weight: 700;padding-top: 10px;color: #fff;">SIMPAS LITE</h1>
+                        <h5 style="padding-top: 10px; color: white;">Sistem Informasi Paketan Gasek</h5>
+                    </strong>
                 </div>
+                <!-- <h1 style="line-height: 0; padding-top: 30px;">SIMPAS LITE</h1>
+                        <h5 style="padding-top: 10px; color: white;">Sistem Informasi Paketan Gasek</h5> -->
                 <div class="card-body">
 
                     <div class="table table-responsive">   

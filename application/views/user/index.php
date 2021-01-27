@@ -25,6 +25,9 @@
   <link href="<?= base_url('assets/vendor/owl.carousel/assets/owl.carousel.min.css') ?>" rel="stylesheet">
   <link href="<?= base_url('assets/vendor/aos/aos.css') ?>" rel="stylesheet">
 
+  <!-- awesome -->
+  <script src="<?= base_url('assets/awesome.js') ?>" crossorigin="anonymous"></script>
+
   <!-- Template Main CSS File -->
   <link href="<?= base_url('assets/css/style_copy3.css') ?>" rel="stylesheet">
 
@@ -73,7 +76,7 @@
 
     <!-- ======= About Section ======= -->
     <section id="grafik" class="about">
-      <div class="containern">
+      <div class="container">
         <?php $this->load->view('user/v_grafik_user')?>
       </div>
     </section><!-- End About Section -->

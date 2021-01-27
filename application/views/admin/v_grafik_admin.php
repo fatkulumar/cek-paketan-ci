@@ -1,4 +1,7 @@
 <script src="<?= base_url('assets/highcharts/code/highcharts.js') ?>"></script>
+<script src="<?= base_url('assets/highcharts/code/export-data.js') ?>"></script>
+<script src="<?= base_url('assets/highcharts/code/exporting.js') ?>"></script>
+
 <?php
         
         $data = [];
@@ -54,30 +57,54 @@
     </section><!-- End Counts Section -->
 
 <div class="row content">
-    <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
+    <div class="col-lg-6 mt-3" data-aos="fade-right" data-aos-delay="100">
         <!-- grafik nama paketan  -->
         <div class="mb-5" id="nama_paketan" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
         <!-- grafik jenis kirim  -->
         <div class="mb-5" id="jenis_kirim" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     </div>
-    <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-left" data-aos-delay="200">
+    <div class="col-lg-6 pt-4 pt-lg-0 mt-3" data-aos="fade-left" data-aos-delay="200">
         <!-- grafik duta paket -->
         <div class="mb-5" id="duta_paket" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     <ul>
         <!-- grafik duta penerima -->
         <div class="mb-5" id="duta_penerima" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     </ul>
-        <p class="font-italic">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua.
-        </p>
+        
+    </div>
+    
+    <div class="container">
+        <div class="row alert alert-danger">
+            <div class="ml-5">
+                <i class="fas fa-exclamation-triangle" style="font-size: 100px;"></i>
+            </div>
+            <div class="col-md-10 font-italic" style="text-align: justify;">
+                <?php foreach($getWarning as $warning) {echo $warning["warning"];} ?>
+                <a onclick="myFunction()" class="fa fa-edit"></a>
 
-        <p>
-            <div class="alert alert-danger">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias quis quae, eius aliquid corrupti sint suscipit dolore eligendi possimus earum esse unde, provident doloribus perferendis, tempora autem debitis distinctio consequuntur!</div>
-        </p>
+            </div>
+        </div>
+
+        <div id="warning" style="display: none;">
+            <form action="<?= base_url('admin/updateWarning/')?>" method="post">
+                <textarea name="warning" cols="140" rows="10"><?php foreach($getWarning as $warning) {echo $warning["warning"];} ?></textarea>
+
+                <button class="btn btn-sm btn-success" type="submit" name="btn_warning">Update</button>
+            </form>
+        </div>
     </div>
 </div>
 
+<script>
+function myFunction() {
+    var x = document.getElementById('warning');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}
+</script>
 
 <script>
 $().ready(function() {
@@ -135,10 +162,11 @@ $.getJSON('http://'+ window.location.host +'/cek-paketan-ci/user/grafikNamaPaket
 
         tooltip: {
         formatter: function () {
-            return '<b>' + this.x + '</b><br/>Total Paketan: ' + this.y + '<br/>' +
+            return '<b>' + this.x + '</b><br/>Total Paketan: ' + this.y + '<br/>'; 
+            // +
             // this.series.name + ': ' + this.y + '<br/>' +
             // 'Total: ' + this.point.stackTotal + 
-            '<br>' +'Langsung:' + jumlah_kirim_langsung + '<br>' +'COD:' + jumlah_kirim_cod;
+            // '<br>' +'Langsung:' + jumlah_kirim_langsung + '<br>' +'COD:' + jumlah_kirim_cod;
         }
         },
 

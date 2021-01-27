@@ -37,6 +37,7 @@ class Admin extends CI_Controller {
 
 		$data['data_asc'] = $this->m_paket->tampil_data_asc();
 		$data['data_desc'] = $this->m_paket->tampil_data_desc();
+		$data['getWarning'] = $this->m_paket->getWarning();
 		$this->load->view('admin/index', $data);
 	}
 
@@ -115,6 +116,21 @@ class Admin extends CI_Controller {
 		if(!isset($id)) show_404(); 
 
 		$this->m_paket->hapus_data($id);
+		redirect('admin/index');
+	}
+
+	public function updateWarning()
+	{
+		$warning = $this->input->post('warning', true);
+
+		$data = [
+			'warning' => $warning
+		];
+
+		// print_r($data); die();
+
+		$this->m_paket->updateWarning($data);
+
 		redirect('admin/index');
 	}
 }

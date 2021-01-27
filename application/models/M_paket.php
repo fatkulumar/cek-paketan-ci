@@ -3,6 +3,7 @@
      
     class M_paket extends CI_Model{
         private $table = "tb_paket";
+        private $table_other = "tb_other";
 
         function tampil_data_asc(){
             return $this->db
@@ -12,6 +13,7 @@
 
         function tampil_data_desc(){
             return $this->db
+            ->limit(6)
             ->order_by('id_paket','desc')
             ->get($this->table)->result_array();
         }
@@ -60,6 +62,18 @@
             ->select('penerima, count(*) as jumlah')
             ->group_by('penerima')
             ->get($this->table);
+        }
+
+        function updateWarning($data)
+        {
+            return $this->db->update($this->table_other, $data);
+        }
+
+        function getWarning()
+        {
+            return $this->db
+            ->select('warning')
+            ->get($this->table_other)->result_array();
         }
     }
 

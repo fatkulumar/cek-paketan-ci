@@ -24,7 +24,9 @@
   <link href="<?= base_url('assets/vendor/venobox/venobox.css') ?>" rel="stylesheet">
   <link href="<?= base_url('assets/vendor/owl.carousel/assets/owl.carousel.min.css') ?>" rel="stylesheet">
   <link href="<?= base_url('assets/vendor/aos/aos.css') ?>" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/f91d97296d.js" crossorigin="anonymous"></script>
+
+  <!-- awesome -->
+  <script src="<?= base_url('assets/awesome.js') ?>" crossorigin="anonymous"></script>
 
   <!-- Template Main CSS File -->
   <!-- <link href="<?= base_url('assets/css/style.css') ?>" rel="stylesheet"> -->
@@ -85,11 +87,9 @@
   <!-- <main> -->
     <!-- ======= About Section ======= -->
     <section id="table" class="align-items-center">
-      <div class="container position-relative" data-aos="fade-in" data-aos-delay="200">
+      <div class="container text-center position-relative" data-aos="fade-in" data-aos-delay="200">
         <!-- include table  -->
-          <div class="col-lg-12">
             <?php $this->load->view('admin/v_table_detail_admin') ?>
-          </div>
       </div>
     </section><!-- End Hero -->
   <!-- <main> -->
@@ -117,22 +117,23 @@
 
       <div class="mr-md-auto text-center text-md-left">
         <div class="copyright">
-          &copy; Copyright <strong><span>Bethany</span></strong>. All Rights Reserved
+          &copy; Copyright 2021 <strong><span>fatkulumar</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
           <!-- All the links in the footer should remain intact. -->
           <!-- You can delete the links only if you purchased the pro version. -->
           <!-- Licensing information: https://bootstrapmade.com/license/ -->
           <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/bethany-free-onepage-bootstrap-theme/ -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          Designed by <a href="https://fatkulumar.com/">fatkulumar</a>
         </div>
       </div>
       <div class="social-links text-center text-md-right pt-3 pt-md-0">
-        <a href="#" class="twitter bg-success"><i class="bx bxl-twitter"></i></a>
-        <a href="#" class="facebook bg-success"><i class="bx bxl-facebook"></i></a>
-        <a href="#" class="instagram bg-success"><i class="bx bxl-instagram"></i></a>
-        <a href="#" class="google-plus bg-success"><i class="bx bxl-skype"></i></a>
-        <a href="#" class="linkedin bg-success"><i class="bx bxl-linkedin"></i></a>
+        <a href="https://twitter.com/fatkul_umar" class="twitter bg-success" target="_blank"><i class="bx bxl-twitter"></i></a>
+        <a href="https://facebook.com/fatkulumar.rezpector" class="facebook bg-success" target="_blank"><i class="bx bxl-facebook"></i></a>
+        <a href="https://instagram.com/fatkulumar" class="instagram bg-success" target="_blank"><i class="bx bxl-instagram"></i></a>
+        <a href="https://fatkulumar.wordpress.com/" class="google-plus bg-success" target="_blank"><i class="bx bxl-wordpress"></i></a>
+        <a href="https://linkedin.com/in/fatkulumar" class="linkedin bg-success" target="_blank"><i class="bx bxl-linkedin"></i></a>
+        <a href="https://fatkulumar.com/" class="linkedin bg-success" target="_blank"><i class="bx bxl-"></i></a>
       </div>
     </div>
   </footer><!-- End Footer -->

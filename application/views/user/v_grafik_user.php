@@ -64,15 +64,27 @@
     <div class="col-lg-6 pt-4 pt-lg-0 mt-5" data-aos="fade-left" data-aos-delay="200">
         <!-- grafik duta paket -->
         <div class="mb-5" id="duta_paket" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-    <ul>
-        <!-- grafik duta penerima -->
-        <div class="mb-5" id="duta_penerima" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-    </ul>
+        <ul>
+            <!-- grafik duta penerima -->
+            <div class="mb-5" id="duta_penerima" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </ul>
+
         <p class="font-italic">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua.
+            
         </p>
     </div>
+
+    <div class="container">
+        <div class="row alert alert-danger">
+            <div class="ml-5">
+                <i class="fas fa-exclamation-triangle" style="font-size: 100px;"></i>
+            </div>
+            <div class="col-md-10 font-italic" style="text-align: justify;">
+                <?php foreach($getWarning as $warning) {echo $warning["warning"];} ?>
+            </div>
+        </div>
+    </div>
+    
 </div>
 
 <script>

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header bg-success">
+                <div class="card-header bg-success text-center">
                     <strong>
                         <h1>SIMPAS LITE</h1>
                     </strong>
@@ -24,6 +24,7 @@
                             <?php
                                 $no = 1;
                                 foreach($data_desc as $dt):
+                                $no++;
                             ?>
                             <tr>
                                     <td><?= $dt['tgl_terima']?></td>
@@ -42,10 +43,10 @@
     </div>
    
 
-<script >
+<!-- <script >
 
     $(document).ready(function(){
 
        $('#table_resi_admin').DataTable(); 
     })
-</script>
+</script> -->

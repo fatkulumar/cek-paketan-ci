@@ -7,7 +7,7 @@
                 <div class="card-header bg-success">
                     <strong>
                         <h1 style="line-height: 0; padding-top: 30px;">SIMPAS LITE</h1>
-                        <!-- <h5 style="padding-top: 10px; color: white;">Sistem Informasi Paketan Gasek</h5> -->
+                        <h5 style="padding-top: 10px; color: white;">Sistem Informasi Paketan Gasek</h5>
                     </strong>
                 </div> 
                 <div class="card-body">
