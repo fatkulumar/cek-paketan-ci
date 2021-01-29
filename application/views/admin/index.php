@@ -26,13 +26,12 @@
   <link href="<?= base_url('assets/vendor/aos/aos.css') ?>" rel="stylesheet">
 
   <!-- awesome -->
-  <script src="<?= base_url('assets/awesome.js') ?>" crossorigin="anonymous"></script>
+  <script src="<?= base_url('assets/awesome.js') ?>"></script>
 
   <!-- Template Main CSS File -->
-  <!-- <link href="<?= base_url('assets/css/style.css') ?>" rel="stylesheet"> -->
+  <link href="<?= base_url('assets/css/style.css') ?>" rel="stylesheet">
   <link href="<?= base_url('assets/css/style_copy3.css') ?>" rel="stylesheet">
 
-  <link rel="stylesheet" href="<?= base_url('assets/datatable/css/dataTables.bootstrap4.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/datatable/css/jquery.dataTables.min.css') ?>">
   
 
@@ -46,7 +45,7 @@
   ======================================================== -->
 </head>
 
-<body>
+<body style="transform-origin: 0 0">
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center bg">
     <div class="container">
@@ -141,7 +140,7 @@
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
   <!-- Vendor JS Files -->
-  <!-- <script src="<?= base_url('assets/vendor/jquery/jquery.min.js') ?>"></script> -->
+  <script src="<?= base_url('assets/vendor/jquery/jquery.min.js') ?>"></script>
   <script src="<?= base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
   <script src="<?= base_url('assets/vendor/jquery.easing/jquery.easing.min.js') ?>"></script>
   <script src="<?= base_url('assets/vendor/php-email-form/validate.js') ?>"></script>
@@ -156,6 +155,10 @@
 
   <!-- Template Main JS File -->
   <script src="<?= base_url('assets/js/main.js') ?>"></script>
+
+  <script>
+    $('#table_resi_detail_admin').DataTable(); 
+  </script>
 
 </body>
 

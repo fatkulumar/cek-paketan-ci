@@ -26,12 +26,15 @@
   <link href="<?= base_url('assets/vendor/aos/aos.css') ?>" rel="stylesheet">
 
   <!-- awesome -->
-  <script src="<?= base_url('assets/awesome.js') ?>" crossorigin="anonymous"></script>
+  <script src="<?= base_url('assets/awesome.js') ?>"></script>
 
   <!-- Template Main CSS File -->
   <link href="<?= base_url('assets/css/style_copy3.css') ?>" rel="stylesheet">
 
   <script src="<?= base_url('assets/vendor/jquery/jquery.min.js') ?>"></script>
+
+  <link rel="stylesheet" href="<?= base_url('assets/datatable//css/jquery.dataTables.min.css') ?>">
+  
 
   <!-- =======================================================
   * Template Name: Bethany - v2.2.0
@@ -41,7 +44,7 @@
   ======================================================== -->
 </head>
 
-<body>
+<body style="transform-origin: 0 0;">
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center bg">
@@ -92,22 +95,23 @@
 
       <div class="mr-md-auto text-center text-md-left">
         <div class="copyright">
-          &copy; Copyright <strong><span>Bethany</span></strong>. All Rights Reserved
+          &copy; Copyright 2021 <strong><span>fatkulumar</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
           <!-- All the links in the footer should remain intact. -->
           <!-- You can delete the links only if you purchased the pro version. -->
           <!-- Licensing information: https://bootstrapmade.com/license/ -->
           <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/bethany-free-onepage-bootstrap-theme/ -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          Designed by <a href="https://fatkulumar.com/">fatkulumar</a>
         </div>
       </div>
       <div class="social-links text-center text-md-right pt-3 pt-md-0">
-        <a href="#" class="twitter bg-success"><i class="bx bxl-twitter"></i></a>
-        <a href="#" class="facebook bg-success"><i class="bx bxl-facebook"></i></a>
-        <a href="#" class="instagram bg-success"><i class="bx bxl-instagram"></i></a>
-        <a href="#" class="google-plus bg-success"><i class="bx bxl-skype"></i></a>
-        <a href="#" class="linkedin bg-success"><i class="bx bxl-linkedin"></i></a>
+        <a href="https://twitter.com/fatkul_umar" class="twitter bg-success" target="_blank"><i class="bx bxl-twitter"></i></a>
+        <a href="https://facebook.com/fatkulumar.rezpector" class="facebook bg-success" target="_blank"><i class="bx bxl-facebook"></i></a>
+        <a href="https://instagram.com/fatkulumar" class="instagram bg-success" target="_blank"><i class="bx bxl-instagram"></i></a>
+        <a href="https://fatkulumar.wordpress.com/" class="google-plus bg-success" target="_blank"><i class="bx bxl-wordpress"></i></a>
+        <a href="https://linkedin.com/in/fatkulumar" class="linkedin bg-success" target="_blank"><i class="bx bxl-linkedin"></i></a>
+        <a href="https://fatkulumar.com/" class="linkedin bg-success" target="_blank"><i class="bx bxl-"></i></a>
       </div>
     </div>
   </footer><!-- End Footer -->
@@ -115,7 +119,7 @@
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
   <!-- Vendor JS Files -->
-  <!-- <script src="<?= base_url('assets/vendor/jquery/jquery.min.js') ?>"></script> -->
+  <script src="<?= base_url('assets/vendor/jquery/jquery.min.js') ?>"></script>
   <script src="<?= base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
   <script src="<?= base_url('assets/vendor/jquery.easing/jquery.easing.min.js') ?>"></script>
   <script src="<?= base_url('assets/vendor/php-email-form/validate.js') ?>"></script>
@@ -128,6 +132,12 @@
 
   <!-- Template Main JS File -->
   <script src="<?= base_url('assets/js/main.js') ?>"></script>
+
+  <script src="<?= base_url('assets/datatable/datatables/jquery.dataTables.js') ?>"></script>
+
+  <script>
+    $('#table_resi_user').DataTable(); 
+  </script>
 
 </body>
 

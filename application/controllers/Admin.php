@@ -133,4 +133,19 @@ class Admin extends CI_Controller {
 
 		redirect('admin/index');
 	}
+
+	public function peringkat()
+	{
+		$rangking = array();
+		$peringkat = $this->m_paket->peringkat()->result_array();
+		foreach($peringkat as $rank){
+			echo $rangking[] =  $rank["jumlah"];
+			echo "<br>";
+		}
+
+		//  echo sort($peringkat);
+
+		// echo $angka = implode(",", $rangking);
+		echo sort($peringkat);
+	}
 }

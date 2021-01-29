@@ -75,6 +75,14 @@
             ->select('warning')
             ->get($this->table_other)->result_array();
         }
+
+        function peringkat()
+        {
+            return $this->db
+            ->select('nama_paket, count(*) as jumlah')
+            ->group_by('nama_paket')
+            ->get($this->table);
+        }
     }
 
 ?>  

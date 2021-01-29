@@ -1,6 +1,7 @@
-<script src="<?= base_url('assets/highcharts/code/highcharts.js') ?>"></script>
-<script src="<?= base_url('assets/highcharts/code/export-data.js') ?>"></script>
-<script src="<?= base_url('assets/highcharts/code/exporting.js') ?>"></script>
+<!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
+<script src="<?= base_url('assets/highcharts/code/highcharts.js') ?>" crossorigin="anonymous"></script>
+<!-- <script src="<?= base_url('assets/highcharts/code/export-data.js') ?>"></script> -->
+<!-- <script src="<?= base_url('assets/highcharts/code/exporting.js') ?>"></script> -->
 
 <?php
         
@@ -26,22 +27,22 @@
         
     ?>
 
-    <section id="counts" class="counts bg-success">
+<section id="counts" class="counts bg-success">
       <div class="container ">
 
         <div class="row counters">
 
-          <div class="col-lg-3 col-6 text-center">
-            <span data-toggle="counter-up">232</span>
-            <p>Clients</p>
+          <div class="col-lg-6 col-6 text-center">
+            <span data-toggle="counter-up"><?= $hitungCod ?></span>
+            <p>COD</p>
           </div>
 
-          <div class="col-lg-3 col-6 text-center">
-            <span data-toggle="counter-up">521</span>
-            <p>Projects</p>
+          <div class="col-lg-6 col-6 text-center">
+            <span data-toggle="counter-up"><?= $hitungLangsung ?></span>
+            <p>Langsung</p>
           </div>
 
-          <div class="col-lg-3 col-6 text-center">
+          <!-- <div class="col-lg-3 col-6 text-center">
             <span data-toggle="counter-up">1,463</span>
             <p>Hours Of Support</p>
           </div>
@@ -49,7 +50,7 @@
           <div class="col-lg-3 col-6 text-center">
             <span data-toggle="counter-up">15</span>
             <p>Hard Workers</p>
-          </div>
+          </div> -->
 
         </div>
 
@@ -57,43 +58,41 @@
     </section><!-- End Counts Section -->
 
 <div class="row content">
-    <div class="col-lg-6 mt-3" data-aos="fade-right" data-aos-delay="100">
+    <div class="col-lg-6 mt-5" data-aos="fade-right" data-aos-delay="100">
         <!-- grafik nama paketan  -->
         <div class="mb-5" id="nama_paketan" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
         <!-- grafik jenis kirim  -->
         <div class="mb-5" id="jenis_kirim" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     </div>
-    <div class="col-lg-6 pt-4 pt-lg-0 mt-3" data-aos="fade-left" data-aos-delay="200">
+    <div class="col-lg-6 pt-4 pt-lg-0 mt-5 mb-4" data-aos="fade-left" data-aos-delay="200">
         <!-- grafik duta paket -->
         <div class="mb-5" id="duta_paket" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-    <ul>
-        <!-- grafik duta penerima -->
-        <div class="mb-5" id="duta_penerima" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-    </ul>
-        
+        <ul>
+            <!-- grafik duta penerima -->
+            <div class="mb-5" id="duta_penerima" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </ul>
+
+        <p id="peringkat" class="font-italic float: right pl-4">
+            <!-- peringkat disini -->
+        </p>
     </div>
-    
-    <div class="container">
-        <div class="row alert alert-danger">
-            <div class="ml-5">
-                <i class="fas fa-exclamation-triangle" style="font-size: 100px;"></i>
-            </div>
-            <div class="col-md-10 font-italic" style="text-align: justify;">
-                <?php foreach($getWarning as $warning) {echo $warning["warning"];} ?>
-                <a onclick="myFunction()" class="fa fa-edit"></a>
 
-            </div>
-        </div>
-
-        <div id="warning" style="display: none;">
-            <form action="<?= base_url('admin/updateWarning/')?>" method="post">
-                <textarea name="warning" cols="140" rows="10"><?php foreach($getWarning as $warning) {echo $warning["warning"];} ?></textarea>
-
-                <button class="btn btn-sm btn-success" type="submit" name="btn_warning">Update</button>
-            </form>
-        </div>
+    <div class="row alert alert-danger ml-4">
+        <i class="fas fa-exclamation-triangle" style="font-size: 100px;"></i>
     </div>
-</div>
+    <div class="col-md-10 ml-2 font-italic row alert alert-danger" style="text-align: justify;">
+        <?php foreach($getWarning as $warning) {echo $warning["warning"];} ?>
+        <a onclick="myFunction()" class="fa fa-edit"></a>
+
+    </div>
+
+    <div id="warning" style="display: none;">
+        <form action="<?= base_url('admin/updateWarning/')?>" method="post">
+            <textarea name="warning" cols="118" rows="10"><?php foreach($getWarning as $warning) {echo $warning["warning"];} ?></textarea>
+
+            <button class="btn btn-sm btn-success" type="submit" name="btn_warning">Update</button>
+        </form>
+    </div>
 
 <script>
 function myFunction() {
@@ -105,13 +104,18 @@ function myFunction() {
     }
 }
 </script>
-
+    
+</div>
 <script>
-$().ready(function() {
+    
+$(document).ready(function() {
 
+//serbver host
+    $.getJSON('http://'+ window.location.host +'/cek-paketan-ci/user/grafikNamaPaket', function(data) {
 
-$.getJSON('http://'+ window.location.host +'/cek-paketan-ci/user/grafikNamaPaket', function(data) {
-    var nama_paket = data.nama_paket
+        var rangking = data.data_rangking
+        // console.log(rangking)
+        var nama_paket = data.nama_paket
         var langsung = data.langsung
         var cod = data.cod
         var nama_paketan = []
@@ -132,134 +136,140 @@ $.getJSON('http://'+ window.location.host +'/cek-paketan-ci/user/grafikNamaPaket
             jumlah.push(parseFloat(nama_paket[i].jumlah));
             jenis_kirim.push(nama_paket[i].jenis_kirim);
         })
-    //    alert(jumlah_kirim_langsung.length);
+
+        var peringkat = []
+        var no = 1;
+        $(rangking).each(function(i){
+            peringkat.push("Peringkat " + no++ + " adalah " + rangking[i].nama + " dengan jumlah " +  rangking[i].jumlah + "<br>")
+        })
+
+        $("#peringkat").html(peringkat)
+
        var jml_langsung = jumlah_kirim_langsung.length
        var jml_cod = jumlah_kirim_cod.length
-    //grafik nama paketan
-        // alert(jumlah)
-    //grafik nama paketan
-    Highcharts.chart('nama_paketan', {
+    //    alert(peringkat)
 
-        chart: {
-        type: 'line'
-        },
+       //grafik nama paketan
+       Highcharts.chart('nama_paketan', {
 
-        title: {
-        text: 'Paketan'
-        },
+            chart: {
+            type: 'line'
+            },
 
-        xAxis: {
-        categories: nama_paketan
-        },
+            title: {
+            text: 'Paketan'
+            },
 
-        yAxis: {
-        allowDecimals: false,
-        min: 0,
-        title: {
-            text: 'Jumlah Paketan'
-        }
-        },
+            xAxis: {
+            categories: nama_paketan
+            },
 
-        tooltip: {
-        formatter: function () {
-            return '<b>' + this.x + '</b><br/>Total Paketan: ' + this.y + '<br/>'; 
-            // +
-            // this.series.name + ': ' + this.y + '<br/>' +
-            // 'Total: ' + this.point.stackTotal + 
-            // '<br>' +'Langsung:' + jumlah_kirim_langsung + '<br>' +'COD:' + jumlah_kirim_cod;
-        }
-        },
+            yAxis: {
+            allowDecimals: false,
+            min: 0,
+            title: {
+                text: 'Jumlah Paketan'
+            }
+            },
 
-        plotOptions: {
-        column: {
-            stacking: 'normal'
-        }
-        },
+            tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>Total Paketan: ' + this.y + '<br/>'
+                //  +
+                // this.series.name + ': ' + this.y + '<br/>' +
+                // 'Total: ' + this.point.stackTotal + 
+                // '<br>' +'Langsung:' + jumlah_kirim_langsung + '<br>' +'COD:' + jumlah_kirim_cod;
+            }
+            },
 
-        series: 
-        [
-        {
-            name: 'Paketan',
-            data: jumlah,
-        },
-
-        //  {
-        // name: 'Joe',
-        // data: [3, 4, 4, 2, 5],
-        // stack: 'male'
-        // }, {
-        // name: 'Jane',
-        // data: [2, 5, 6, 2, 1],
-        // stack: 'female'
-        // }, {
-        // name: 'Janet',
-        // data: [3, 0, 4, 4, 3],
-        // stack: 'female'
-        // }
-        ]
-        });
-
-    //grafik jenis kirim
-    Highcharts.chart('jenis_kirim', {
-
-        chart: {
-        type: 'column'
-        },
-
-        title: {
-        text: 'Jumlah Jenis Kirim'
-        },
-
-        xAxis: {
-        categories: ['Langsung', 'COD']
-        },
-
-        yAxis: {
-        allowDecimals: false,
-        min: 0,
-        title: {
-            text: 'Jumlah Jenis Kirim'
-        }
-        },
-
-        tooltip: {
-        formatter: function () {
-            return '<b>' + this.x + '</b><br/>' +
-            this.series.name + ': ' + this.y + '<br/>' +
-            'Total: ' + this.point.stackTotal;
-        }
-        },
-
-        plotOptions: {
-        column: {
-            stacking: 'normal'
-        }
-        },
-
-        series: [
+            plotOptions: {
+            column: {
+                stacking: 'normal'
+            }
+            },
+            
+            series: 
+            [
             {
-        name: 'Langsung',
-        data: [jml_langsung, jml_cod],
-        stack: 'male'
-        }, 
-        {
-        name: 'COD',
-        data: [jml_cod],
-        stack: 'male'
-        },
-        //  {
-        // name: 'Jane',
-        // data: [2, 5, 6, 2, 1],
-        // stack: 'female'
-        // }, {
-        // name: 'Janet',
-        // data: [3, 0, 4, 4, 3],
-        // stack: 'female'
-        // }
+                name: 'Paketan'   ,
+                data: jumlah,
+            },
+
+            //  {
+            // name: 'Joe',
+            // data: [3, 4, 4, 2, 5],
+            // stack: 'male'
+            // }, {
+            // name: 'Jane',
+            // data: [2, 5, 6, 2, 1],
+            // stack: 'female'
+            // }, {
+            // name: 'Janet',
+            // data: [3, 0, 4, 4, 3],
+            // stack: 'female'
+            // }
         ]
         });
+        //grafik jenis kirim
+        Highcharts.chart('jenis_kirim', {
 
-    //grafik duta paket
+            chart: {
+            type: 'column'
+            },
+
+            title: {
+            text: 'Jumlah Jenis Kirim'
+            },
+
+            xAxis: {
+            categories: ['Langsung', 'COD']
+            },
+
+            yAxis: {
+            allowDecimals: false,
+            min: 0,
+            title: {
+                text: 'Jumlah Jenis Kirim'
+            }
+            },
+
+            tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>' +
+                this.series.name + ': ' + this.y + '<br/>' +
+                'Total: ' + this.point.stackTotal;
+            }
+            },
+
+            plotOptions: {
+            column: {
+                stacking: 'normal'
+            }
+            },
+
+            series: [
+                {
+            name: 'Langsung',
+            data: [jml_langsung, jml_cod],
+            stack: 'male'
+            }, 
+            {
+            name: 'COD',
+            data: [jml_cod],
+            stack: 'male'
+            },
+            //  {
+            // name: 'Jane',
+            // data: [2, 5, 6, 2, 1],
+            // stack: 'female'
+            // }, {
+            // name: 'Janet',
+            // data: [3, 0, 4, 4, 3],
+            // stack: 'female'
+            // }
+        ]
+        });
+        //grafik duta paket
         Highcharts.chart('duta_paket', {
             chart: {
                 plotBackgroundColor: null,
@@ -324,7 +334,8 @@ $.getJSON('http://'+ window.location.host +'/cek-paketan-ci/user/grafikNamaPaket
             // ]
             }]
         });
-    //grafik duta peneruma
+
+        //grafik duta peneruma
         Highcharts.chart('duta_penerima', {
             chart: {
                 plotBackgroundColor: null,
@@ -389,6 +400,6 @@ $.getJSON('http://'+ window.location.host +'/cek-paketan-ci/user/grafikNamaPaket
             // ]
             }]
         });
-});
+    });
 })
 </script>

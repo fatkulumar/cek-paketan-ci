@@ -72,10 +72,10 @@
 
 <script >
 
-    $(document).ready(function(){
+    // $(document).ready(function(){
 
-       $('#table_resi_detail_admin').DataTable(); 
-    });
+    //    $('#table_resi_detail_admin').DataTable(); 
+    // });
 
     function userInput(id)
     {

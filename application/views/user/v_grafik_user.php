@@ -1,4 +1,6 @@
 <script src="assets/highcharts/code/highcharts.js"></script>
+<!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
+
 
     <?php
         
@@ -21,6 +23,8 @@
                 'y' => $jumlah_penerima,
             ];
         }
+
+        // print_r($data_rangking);
         
     ?>
 
@@ -61,37 +65,36 @@
         <!-- grafik jenis kirim  -->
         <div class="mb-5" id="jenis_kirim" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     </div>
-    <div class="col-lg-6 pt-4 pt-lg-0 mt-5" data-aos="fade-left" data-aos-delay="200">
+    <div class="col-lg-6 pt-4 pt-lg-0 mt-5 mb-4" data-aos="fade-left" data-aos-delay="200">
         <!-- grafik duta paket -->
         <div class="mb-5" id="duta_paket" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-        <ul>
+        <!-- <ul> -->
             <!-- grafik duta penerima -->
-            <div class="mb-5" id="duta_penerima" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-        </ul>
+            <!-- <div class="mb-5" id="duta_penerima" style="min-width: 310px; height: 400px; margin: 0 auto"></div> -->
+        <!-- </ul> -->
 
-        <p class="font-italic">
-            
-        </p>
+        <!-- <p id="peringkat" class="font-italic float: right pl-4"> -->
+            <!-- peringkat disini -->
+        <!-- </p> -->
     </div>
 
-    <div class="container">
-        <div class="row alert alert-danger">
-            <div class="ml-5">
-                <i class="fas fa-exclamation-triangle" style="font-size: 100px;"></i>
-            </div>
-            <div class="col-md-10 font-italic" style="text-align: justify;">
-                <?php foreach($getWarning as $warning) {echo $warning["warning"];} ?>
-            </div>
-        </div>
+    <div class="row alert alert-danger ml-4">
+        <i class="fas fa-exclamation-triangle" style="font-size: 100px;"></i>
+    </div>
+    <div class="col-md-10 ml-2 font-italic row alert alert-danger" style="text-align: justify;">
+        <?php foreach($getWarning as $warning) {echo $warning["warning"];} ?>
     </div>
     
 </div>
-
 <script>
-$().ready(function() {
+    
+$(document).ready(function() {
 
-
+//serbver host
     $.getJSON('http://'+ window.location.host +'/cek-paketan-ci/user/grafikNamaPaket', function(data) {
+
+        var rangking = data.data_rangking
+        // console.log(rangking)
         var nama_paket = data.nama_paket
         var langsung = data.langsung
         var cod = data.cod
@@ -113,12 +116,21 @@ $().ready(function() {
             jumlah.push(parseFloat(nama_paket[i].jumlah));
             jenis_kirim.push(nama_paket[i].jenis_kirim);
         })
-    //    alert(jumlah_kirim_langsung.length);
+
+        var peringkat = []
+        var no = 1;
+        $(rangking).each(function(i){
+            peringkat.push("Peringkat " + no++ + " adalah " + rangking[i].nama + " dengan jumlah " +  rangking[i].jumlah + "<br>")
+        })
+
+        $("#peringkat").html(peringkat)
+
        var jml_langsung = jumlah_kirim_langsung.length
        var jml_cod = jumlah_kirim_cod.length
-    //grafik nama paketan
-        // alert(jumlah)
-        Highcharts.chart('nama_paketan', {
+    //    alert(peringkat)
+
+       //grafik nama paketan
+       Highcharts.chart('nama_paketan', {
 
             chart: {
             type: 'line'
@@ -142,10 +154,11 @@ $().ready(function() {
 
             tooltip: {
             formatter: function () {
-                return '<b>' + this.x + '</b><br/>Total Paketan: ' + this.y + '<br/>' +
+                return '<b>' + this.x + '</b><br/>Total Paketan: ' + this.y + '<br/>'
+                //  +
                 // this.series.name + ': ' + this.y + '<br/>' +
                 // 'Total: ' + this.point.stackTotal + 
-                '<br>' +'Langsung:' + jumlah_kirim_langsung + '<br>' +'COD:' + jumlah_kirim_cod;
+                // '<br>' +'Langsung:' + jumlah_kirim_langsung + '<br>' +'COD:' + jumlah_kirim_cod;
             }
             },
 
@@ -158,7 +171,7 @@ $().ready(function() {
             series: 
             [
             {
-                name: 'Paketan',
+                name: 'Paketan'   ,
                 data: jumlah,
             },
 

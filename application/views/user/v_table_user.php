@@ -1,5 +1,4 @@
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+
     <!-- Content Header (Page header) -->
     <div class="row">
         <div class="col-md-12 mt-2">
@@ -56,12 +55,4 @@
         </div>
     </div>
 
-    <script src="<?= base_url('assets/datatable/datatables/jquery.dataTables.js') ?>"></script>
-    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 
-    <script>
-        $(document).ready(function(){
-
-            $('#table_resi_user').DataTable(); 
-        })
-    </script>
