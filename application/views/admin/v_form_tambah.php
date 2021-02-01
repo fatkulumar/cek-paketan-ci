@@ -5,21 +5,23 @@
         <div class="card-header bg-success text-center"><strong><h1>Tambah Data</strong></div>
           <div class="card-body">
 
-            <form class="mt-3 mb-3" action="<?= base_url('admin/tambah_aksi') ?>" method="POST">
+            <form id="tambah" class="mt-3 mb-3" action="<?= base_url('admin/tambah_aksi') ?>" method="POST">
                 <input type="hidden" value="<?= date("d-m-Y h:i:s") ?>" name="tgl_terima">
                 <div class="form-group">
+                    <div style="color: red; display: none;" id="error_no_hp">Kosong</div>
                     <label for="no_hp">Hp</label>
-                    <input class="form-control" type="number" name="no_hp" id="no_hp" required placeholder="085">
+                    <input id="no_hp" class="form-control" type="number" name="no_hp" placeholder="085">
                 </div>
 
                 <div class="form-group">
+                  <div style="color: red; display: none;" id="error_nama_paket">Kosong</div>
                     <label for="nama_paket">Nama Paketan</label>
-                    <input class="form-control" type="text" name="nama_paket"  required>
+                    <input id="nama_paket" class="form-control" type="text" name="nama_paket" >
                 </div>
                 
                 <div class="form-group">
                     <label for="penerima">Penerima</label>
-                    <select class="form-control" name="penerima" required>
+                    <select id="penerima" class="form-control" name="penerima">
                       <option value="Gasmul">Gasmul</option>
                     </select>
                 </div>
@@ -33,10 +35,66 @@
                 </div>
 
                 <div>
-                    <button class="btn btn-success btn-sm" type="submit" name="add">Tambah Resi</button>
+                    <!-- <button id="add" class="btn btn-success btn-sm" type="submit" name="add">Tambah Resi</button> -->
+                    <a class="btn btn-sm btn-danger" onclick="formcheck()" id="add">Tambah Data</a>
                 </div>
             </form>
           </div>
         </div>
       </div>
     </div>
+
+<script>
+  $('#add').on('click', function(){ 
+    var nama_paket = $('#nama_paket').val()
+    var no_hp = $('#no_hp').val()
+    var data = $('#tambah').serialize()
+    var validasi_angka = /^[0-9]+$/;
+
+    if(!no_hp.match(validasi_angka)){
+      alert("Massukan Angka")
+    }
+
+    if(no_hp.length > 13) {
+      alert("No Hp Lebih Dari 13 Angka")
+    }
+
+    if(nama_paket == ""){
+      $('#error_nama_paket').show()
+      $('html, body').animate({scrollTop:0}, 'slow');
+    }else{
+      $('#error_nama_paket').hide()
+    }
+    if(no_hp == ""){
+      $('#error_no_hp').show()
+      $('html, body').animate({scrollTop:0}, 'slow');
+    }
+    else{
+      $('#error_no_hp').hide()
+    }
+    if(nama_paket != "" && no_hp != "") {
+      $.ajax({
+        url: '<?= base_url('admin/tambah_aksi') ?>',
+        type: 'POST',
+        data : data,
+        dataType: 'JSON',
+        success: function(data) {
+          var id_akhir = data.id_akhir['id_paket']
+          var tgl_terima = data.tgl_terima
+          var name_paket = data.nama_paket
+          var no_hp = data.hp
+          var penerima = data.penerima
+          var jenis_kirim = data.jenis_kirim
+          var html = "<tr><td>"+ tgl_terima +"</td><td>"+ nama_paket +"</td><td>"+ penerima +"</td><td  style='text-align: center;'><button dissable class='btn btn-sm btn-danger'>Belum Diambil</button></td></tr>"
+          var html_detail = "<tr><td>" + tgl_terima + "</td><td>"+ nama_paket +"</td><td>"+ no_hp +"</td><td>"+ penerima +"</td><td>"+ jenis_kirim +"</td><td></td><td style='text-align: center;'><a class='btn btn-danger btn-sm' onclick='userInput("+id_akhir+")' href=''>Belum Diambil</a><div><span></span></div></td><td><a class='btn btn-sm btn-danger' onclick='return confirm('Yakin Hapus '"+ nama_paket + "'?')' href='<?= base_url('admin/hapus_data/') ?>"+id_akhir+"'><i class='fa fa-trash' aria-hidden='true'></i></a><a class='btn btn-sm btn-success' href='<?= base_url('admin/edit_data/') ?>"+id_akhir+"'><i class='fa fa-edit' aria-hidden='true'></i></a></td></tr>"
+          $('#nama_paket').val('')
+          $('#no_hp').val('')
+          $('#tampil_data_paket').prepend(html)            
+          $('#tampil_data_paket_detail').append(html_detail)   
+          $('html, body').animate({scrollTop:0}, 'slow');
+          $('.alert').show()  
+        }
+      })
+    }
+  })
+</script>

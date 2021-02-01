@@ -77,33 +77,33 @@
         </p>
     </div>
 
-    <div class="row alert alert-danger ml-4">
+    <div class="alert alert-danger ml-3">
         <i class="fas fa-exclamation-triangle" style="font-size: 100px;"></i>
     </div>
-    <div class="col-md-10 ml-2 font-italic row alert alert-danger" style="text-align: justify;">
+    <div class="col-md-10 font-italic alert alert-danger" style="text-align: justify;">
         <?php foreach($getWarning as $warning) {echo $warning["warning"];} ?>
         <a onclick="myFunction()" class="fa fa-edit"></a>
 
     </div>
 
-    <div id="warning" style="display: none;">
+    <div class="col-md-12 font-italic" id="warning" style="display: none;">
         <form action="<?= base_url('admin/updateWarning/')?>" method="post">
-            <textarea name="warning" cols="118" rows="10"><?php foreach($getWarning as $warning) {echo $warning["warning"];} ?></textarea>
+            <textarea class="form-control" name="warning" cols="" rows="10"><?php foreach($getWarning as $warning) {echo $warning["warning"];} ?></textarea>
 
             <button class="btn btn-sm btn-success" type="submit" name="btn_warning">Update</button>
         </form>
     </div>
 
-<script>
-function myFunction() {
-    var x = document.getElementById('warning');
-    if (x.style.display === 'none') {
-        x.style.display = 'block';
-    } else {
-        x.style.display = 'none';
-    }
-}
-</script>
+    <script>
+        function myFunction() {
+            var x = document.getElementById('warning');
+            if (x.style.display === 'none') {
+                x.style.display = 'block';
+            } else {
+                x.style.display = 'none';
+            }
+        }
+    </script>
     
 </div>
 <script>
@@ -403,3 +403,5 @@ $(document).ready(function() {
     });
 })
 </script>
+<script src="<?= base_url('assets/highcharts/code/exporting.js') ?>"></script>
+<script src="<?= base_url('assets/highcharts/code/export-data.js') ?>"></script>

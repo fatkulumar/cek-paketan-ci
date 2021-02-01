@@ -2,8 +2,15 @@
     defined('BASEPATH') OR exit('No direct script access allowed');
      
     class M_paket extends CI_Model{
+        
         private $table = "tb_paket";
         private $table_other = "tb_other";
+
+        public function __construct()
+        {
+            parent::__construct();
+            $this->load->database();
+        }
 
         function tampil_data_asc(){
             return $this->db
@@ -13,6 +20,7 @@
 
         function tampil_data_desc(){
             return $this->db
+            ->select('id_paket,nama_paket,tgl_terima,penerima,jenis_kirim,status_ambil, tgl_ambil')
             ->limit(6)
             ->order_by('id_paket','desc')
             ->get($this->table)->result_array();
@@ -69,10 +77,15 @@
             return $this->db->update($this->table_other, $data);
         }
 
+        function updateInfo($data)
+        {
+            return $this->db->update($this->table_other, $data);
+        }
+
         function getWarning()
         {
             return $this->db
-            ->select('warning')
+            ->select('warning, info')
             ->get($this->table_other)->result_array();
         }
 
@@ -83,6 +96,14 @@
             ->group_by('nama_paket')
             ->get($this->table);
         }
+
+        function idAkhir()
+        {
+            return $this->db
+            ->select('id_paket')
+            ->order_by('id_paket', 'desc')
+            ->get($this->table);
+        }
     }
 
-?>  
+?>

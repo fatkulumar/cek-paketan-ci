@@ -38,16 +38,18 @@ class Admin extends CI_Controller {
 		$data['data_asc'] = $this->m_paket->tampil_data_asc();
 		$data['data_desc'] = $this->m_paket->tampil_data_desc();
 		$data['getWarning'] = $this->m_paket->getWarning();
+
 		$this->load->view('admin/index', $data);
 	}
 
 	public function tambah_aksi()
 	{
-		$nama_paket = $this->input->post('nama_paket',true);
+		$id_paket = $this->input->post('id_paket', true);
+		$nama_paket = $this->input->post('nama_paket', true);
 		$penerima = $this->input->post('penerima',true);
-		$jenis_kirim = $this->input->post('jenis_kirim');
-		$hp = $this->input->post('no_hp');
-		$tgl_terima = $this->input->post('tgl_terima');
+		$jenis_kirim = $this->input->post('jenis_kirim',true);
+		$hp = $this->input->post('no_hp',true);
+		$tgl_terima = $this->input->post('tgl_terima', true);
 
 		$data = [
 			'hp' => $hp,
@@ -58,9 +60,13 @@ class Admin extends CI_Controller {
 			'creat_at' => $tgl_terima
 		];
 
+		$kirim_telegram = "Nama: " . $nama_paket . " dengan nomor hp " . $hp . " paketan sudah ada di Gasek Multimedia pada " .$tgl_terima. " harap segera di ambil karena gudang mau meledak. Terimakasih . info lain cek di simpas.gasekmultimedia.com Pesan ini di kirim otomatis oleh sistem karena anda sudah numpang paket di gasek multimedia";
 
-		$this->m_paket->input_paket($data, 'tb_paket');
-		redirect('admin/index');
+		// $this->m_paket->input_paket($data, 'tb_paket');
+		$data["id_akhir"] = $this->m_paket->idAkhir()->row_array();
+		// redirect('admin/index');
+		// $this->bot_telegram($kirim_telegram);
+		echo json_encode($data);
 	}
 
 	public function edit_data($id)
@@ -90,7 +96,7 @@ class Admin extends CI_Controller {
 
 
 		$this->m_paket->update_data($data, 'tb_paket', $id);
-		redirect('admin/index');
+		redirect('admin/index', 'refresh');
 	}
 
 	public function updateNamaPengambil($id)
@@ -107,7 +113,7 @@ class Admin extends CI_Controller {
 		];
 
 		$this->m_paket->update_data($data, 'tb_paket', $id_paket);
-
+		
 		echo json_encode($data);
 	}
 
@@ -134,6 +140,21 @@ class Admin extends CI_Controller {
 		redirect('admin/index');
 	}
 
+	public function updateInfo()
+	{
+		$warning = $this->input->post('info', true);
+
+		$data = [
+			'info' => $warning
+		];
+
+		// print_r($data); die();
+
+		$this->m_paket->updateInfo($data);
+
+		redirect('admin/index');
+	}
+
 	public function peringkat()
 	{
 		$rangking = array();
@@ -147,5 +168,21 @@ class Admin extends CI_Controller {
 
 		// echo $angka = implode(",", $rangking);
 		echo sort($peringkat);
+	}
+
+	private function bot_telegram($data)
+	{
+		define('BOT_TOKEN', '1605818633:AAEbvEQB417rgK_gDjlnI9_oORUOEENlh7Y');
+		define('CHAT_ID', '585866693');
+
+		$pesan = json_encode($data);
+		$API = "https://api.telegram.org/bot".BOT_TOKEN."/sendmessage?chat_id=".CHAT_ID."&text=$data";
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+		curl_setopt($ch, CURLOPT_URL, $API);
+		$result = curl_exec($ch);
+		curl_close($ch);
+		return $result;
 	}
 }

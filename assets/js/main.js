@@ -1,13 +1,13 @@
 /**
 * Template Name: Bethany - v2.2.0
-* Template URL: https://bootstrapmade.com/bethany-free-onepage-bootstrap-theme/
+* Template URL: https://bootstrapmade.com/bethany-free-onepage-bootstrap-tfnavme/
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
 !(function($) {
   "use strict";
 
-  // Smooth scroll for the navigation menu and links with .scrollto classes
+  // Smooth scroll for the navigation mennavu and links with .scrollto classes
   var scrolltoOffset = $('#header').outerHeight() - 1;
   $(document).on('click', '.nav-menu a, .mobile-nav a, .scrollto', function(e) {
     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
