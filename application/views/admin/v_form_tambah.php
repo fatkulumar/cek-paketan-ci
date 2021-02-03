@@ -1,4 +1,26 @@
+<link rel="stylesheet" href="<?= base_url('assets/autocomplete/jquery-ui.css') ?>">
+<script src="<?= base_url('assets/autocomplete/jquery-ui.js') ?>"></script>
 
+
+<?php
+  $nama_pk = [];
+  foreach($nama_paket as $pk){
+      $nama = $pk["nama_paket"];
+      $nama_pk[] = $nama;
+  }
+
+  $data_paket = implode(",",$nama_pk); 
+
+  $hp_pk = [];
+  foreach($nama_paket as $hp){
+      $hp = $hp["hp"];
+      $hp_pk[] = $hp;
+  }
+
+  $data_hp = implode(",",$hp_pk);
+?>
+
+  
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -38,18 +60,42 @@
                     <!-- <button id="add" class="btn btn-success btn-sm" type="submit" name="add">Tambah Resi</button> -->
                     <a class="btn btn-sm btn-danger" onclick="formcheck()" id="add">Tambah Data</a>
                 </div>
+
             </form>
           </div>
         </div>
       </div>
     </div>
 
+    
+
 <script>
+
+		var data = [
+        <?= json_encode($data_paket) ?>
+    ];
+    
+		$("#nama_paket").autocomplete({
+		  source: data
+    });
+    
+    var data_hp = [
+        <?= json_encode($data_hp) ?>
+		];
+		$("#no_hp").autocomplete({
+		  source: data_hp
+		});
+
   $('#add').on('click', function(){ 
     var nama_paket = $('#nama_paket').val()
     var no_hp = $('#no_hp').val()
     var data = $('#tambah').serialize()
     var validasi_angka = /^[0-9]+$/;
+
+
+    if(no_hp < 11){
+      alert("Masukan Nomor Hp Yang Valid")
+    }
 
     if(!no_hp.match(validasi_angka)){
       alert("Massukan Angka")

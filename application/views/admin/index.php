@@ -53,7 +53,7 @@
   ======================================================== -->
 </head>
 
-<body>
+<body style="transform-origin: 0 0">
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center bg">
     <div class="container">
@@ -199,7 +199,35 @@
   <script src="<?= base_url('assets/typed/main.js')?>"></script>
 
   <script>
-    $('#table_resi_detail_admin').DataTable(); 
+  // $(document).ready(function() {
+    $(() => {
+
+    
+
+
+    $('#table_resi_detail_admin').DataTable({
+      "processing": true, 
+        "serverSide": true, 
+        "order": [], //Initial no order.
+ 
+        "ajax": {
+            "url": site_url = "http://"+ window.location.host +"/cek-paketan-ci/Admin/ajax_list",
+            "type": "POST"
+        },
+        //Set column
+        "columnDefs": [
+        { 
+            "targets": [ 0 ], //first column / numbering column
+            "orderable": false, //set not orderable
+        },
+        ],
+      }); 
+      
+
+// })
+})
+
+
   </script>
 
 </body>

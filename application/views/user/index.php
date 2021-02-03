@@ -150,9 +150,9 @@
   <script src="<?= base_url('assets/typed/typed.js/typed.min.js')?>"></script>
   <script src="<?= base_url('assets/typed/main.js')?>"></script>
 
-  <script>
+  <!-- <script>
     $('#table_resi_user').DataTable(); 
-  </script>
+  </script> -->
 
 </body>
 

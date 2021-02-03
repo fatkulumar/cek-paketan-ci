@@ -24,6 +24,7 @@ class Admin extends CI_Controller {
 		parent::__construct();		
 		$this->load->model('m_paket');
 		$this->load->helper('url');
+		$this->load->model('M_paket','paket');
 		// $this->load->library('form_validation');
 	}
 
@@ -184,5 +185,44 @@ class Admin extends CI_Controller {
 		$result = curl_exec($ch);
 		curl_close($ch);
 		return $result;
+	}
+
+	public function ajax_list()
+    {
+        $list = $this->m_paket->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $paket) {
+            $no++;
+            $row = array();
+            // $row[] = $no;
+            $row[] = $paket->tgl_terima;
+            $row[] = $paket->nama_paket;
+            $row[] = $paket->hp;
+            $row[] = $paket->penerima;
+            $row[] = $paket->jenis_kirim;
+			$row[] = $paket->pengambil;
+			if($paket->status_ambil==''){
+
+				$btn_status="<td><a class='btn btn-danger btn-sm' onclick='userInput($paket->id_paket)' href=''>Belum Diambil</a></td>";
+			}else{
+
+				$btn_status="<button class='btn btn-success btn-sm' disabled>Sudah Diambil</button><div><span>$paket->tgl_ambil</span>";
+			}
+		$row[]=$btn_status;
+		$row[]= "<td><a class='btn btn-sm btn-danger' onclick='return confirm('Yakin Hapus $paket->nama_paket ?')' href='".base_url("admin/hapus_data/$paket->id_paket")."'><i class='fa fa-trash' aria-hidden='true'></i></a></td><td><a class='btn btn-sm btn-success' onclick='return confirm('Yakin Hapus $paket->nama_paket ?')' href='".base_url("admin/edit_data/$paket->id_paket")."'><i class='fa fa-edit' aria-hidden='true'></i></a></td>";
+
+
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->paket->count_all(),
+                        "recordsFiltered" => $this->paket->count_filtered(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
 	}
 }

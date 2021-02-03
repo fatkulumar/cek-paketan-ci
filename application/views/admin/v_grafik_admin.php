@@ -108,9 +108,9 @@
 </div>
 <script>
     
-$(document).ready(function() {
-
-//serbver host
+// $(document).ready(function() {
+$(() =>{
+//server host
     $.getJSON('http://'+ window.location.host +'/cek-paketan-ci/user/grafikNamaPaket', function(data) {
 
         var rangking = data.data_rangking
@@ -402,6 +402,7 @@ $(document).ready(function() {
         });
     });
 })
+// })
 </script>
 <script src="<?= base_url('assets/highcharts/code/exporting.js') ?>"></script>
 <script src="<?= base_url('assets/highcharts/code/export-data.js') ?>"></script>

@@ -24,6 +24,7 @@ class User extends CI_Controller {
 		parent::__construct();		
 		$this->load->model('m_paket');
 		$this->load->helper('url');
+		$this->load->model('M_paket','paket');
 		// $this->load->library('form_validation');
 	}
 
@@ -128,4 +129,32 @@ class User extends CI_Controller {
    
 		echo json_encode($data);
 	}
+
+	public function ajax_list()
+    {
+        $list = $this->m_paket->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $paket) {
+            $no++;
+            $row = array();
+            $row[] = $paket->tgl_terima;
+            $row[] = $paket->nama_paket;
+            $row[] = $paket->hp;
+            $row[] = $paket->penerima;
+            $row[] = $paket->jenis_kirim;
+            $row[] = $paket->status_ambil;
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->paket->count_all(),
+                        "recordsFiltered" => $this->paket->count_filtered(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
+    }
 }
