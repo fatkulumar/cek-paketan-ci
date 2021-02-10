@@ -26,6 +26,7 @@ class Admin extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->model('M_paket','paket');
 		// $this->load->library('form_validation');
+		date_default_timezone_set('Asia/Jakarta');
 	}
 
 	public function index()
@@ -51,6 +52,7 @@ class Admin extends CI_Controller {
 		$jenis_kirim = $this->input->post('jenis_kirim',true);
 		$hp = $this->input->post('no_hp',true);
 		$tgl_terima = $this->input->post('tgl_terima', true);
+		$tahun = intval(date('YYYY'));
 
 		$data = [
 			'hp' => $hp,
@@ -58,15 +60,16 @@ class Admin extends CI_Controller {
 			'penerima' => $penerima,
 			'jenis_kirim' => $jenis_kirim,
 			'tgl_terima' => $tgl_terima,
-			'creat_at' => $tgl_terima
+			'creat_at' => $tgl_terima,
+			'tahun' => $tahun
 		];
 
 		$kirim_telegram = "Nama: " . $nama_paket . " dengan nomor hp " . $hp . " paketan sudah ada di Gasek Multimedia pada " .$tgl_terima. " harap segera di ambil karena gudang mau meledak. Terimakasih . info lain cek di simpas.gasekmultimedia.com Pesan ini di kirim otomatis oleh sistem karena anda sudah numpang paket di gasek multimedia";
 
-		// $this->m_paket->input_paket($data, 'tb_paket');
+		$this->m_paket->input_paket($data, 'tb_paket');
 		$data["id_akhir"] = $this->m_paket->idAkhir()->row_array();
 		// redirect('admin/index');
-		// $this->bot_telegram($kirim_telegram);
+		$this->bot_telegram($kirim_telegram);
 		echo json_encode($data);
 	}
 
@@ -174,7 +177,7 @@ class Admin extends CI_Controller {
 	private function bot_telegram($data)
 	{
 		define('BOT_TOKEN', '1605818633:AAEbvEQB417rgK_gDjlnI9_oORUOEENlh7Y');
-		define('CHAT_ID', '585866693');
+		define('CHAT_ID', '-528017095');
 
 		$pesan = json_encode($data);
 		$API = "https://api.telegram.org/bot".BOT_TOKEN."/sendmessage?chat_id=".CHAT_ID."&text=$data";
@@ -224,5 +227,114 @@ class Admin extends CI_Controller {
                 );
         //output to json format
         echo json_encode($output);
+	}
+
+	public function grafikNamaPaket($tahun)
+	{
+		header("Access-Control-Allow-Origin: *");
+		header("Access-Control-Allow-Credentials: true");
+		header("Access-Control-Max-Age: 1000");
+		header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Cache-Control, Pragma, Authorization, Accept, Accept-Encoding");
+		header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
+		header('Content-Type: application/json');
+		
+		$data['paketan_admin'] = [];
+		$data['nama_paket'] = $this->m_paket->grafikPaket($tahun)->result_array();
+		foreach($data['nama_paket'] as $row){
+			$nama = $row["nama_paket"];
+            $jml = intval($row["jumlah"]);
+            $data['paketan_admin'][] = [
+                'name' => $nama,
+                'y' => $jml,
+            ];
+
+			
+
+			$data['cod']=$this->db
+			->select('nama_paket,jenis_kirim, count(*) as jumlah_cod')
+			->group_by('nama_paket')
+			->get_where('tb_paket',['jenis_kirim'=> "COD"])->result_array();
+
+			$data['langsung']=$this->db
+			->select('nama_paket,jenis_kirim, count(*) as jumlah_langsung')
+			->group_by('nama_paket')
+			->get_where('tb_paket',['jenis_kirim'=> "langsung"])->result_array();
+
+			$data['peringkat']=$this->db
+			->select('nama_paket,jenis_kirim, count(*) as jumlah_langsung')
+			->group_by('nama_paket')
+			->get_where('tb_paket',['jenis_kirim'=> "langsung"])->result_array();
+
+			$rangking = array();
+			$data['peringkat'] = $this->m_paket->peringkat()->result_array();
+			foreach($data['peringkat'] as $rank => $val){
+			$rangking[$val["nama_paket"]] = $val['jumlah'];
+		}
+
+			arsort($rangking);
+			$data['rangking'] = $rangking;
+
+			$data_rangking = array();
+			$no = 0;
+			foreach($rangking as $rang => $val){
+				$no++;
+				if($no == 4){break;	}
+				$data_rangking[] = [
+					'nama' => $rang,
+					'jumlah' => $val
+				];
+				}
+
+				$data["data_rangking"] = $data_rangking;
+			
+			}
+		$data['tahun'] = $tahun;
+		$data['jumlah_nama_paket'] = $this->m_paket->grafikNamaPaket()->num_rows();
+		$data['data_admin_penerima'] = [];
+		$data['data_penerima'] = $this->m_paket->grafikPenerimaJson($tahun)->result_array();
+		foreach($data['data_penerima'] as $rows) {
+			$nama_penerima = $rows["penerima"];
+			$jml_penerima = intval($rows["jumlah"]);
+			$data['data_admin_penerima'][] = [
+				'name' => $nama_penerima,
+				'y' => $jml_penerima
+			];
+		}
+
+		// $rangking = array();
+		// $data['peringkat'] = $this->m_paket->peringkat()->result_array();
+		// foreach($data['peringkat'] as $rank){
+		// 	echo $rangking[] =  $rank["jumlah"];
+		// 	echo "<br>";
+		// }
+
+		// rsort($rangking);
+		// $data['rank'] = $rangking;
+
+		// $data = [];
+        // foreach($nama_paket as $pk){
+        //     $nama = $pk["nama_paket"];
+        //     $jml = intval($pk["jumlah"]);
+        //     $data[] = [
+        //         'name' => $nama,
+        //         'y' => $jml,
+        //     ];
+        // }
+
+   
+		echo json_encode($data);
+	}
+
+	public function auto_nama_paket()
+	{
+		$data['nama_paketan'] = [];
+		$data['nama_paket'] = $this->m_paket->grafikNamaPaket()->result_array();
+		foreach($data['nama_paket'] as $row){
+			$nama = $row['nama_paket'];
+			$data['nama_paketan'][] = [
+				'nama_paket' => $nama
+			];
+		}
+		echo json_encode($data);
 	}
 }

@@ -87,11 +87,10 @@
     
 </div>
 <script>
-    
 $(document).ready(function() {
-
+    var tahun = new Date().getFullYear()
 //serbver host
-    $.getJSON('http://'+ window.location.host +'/cek-paketan-ci/user/grafikNamaPaket', function(data) {
+    $.getJSON('http://'+ window.location.host +'/cek-paketan-ci/user/grafikNamaPaket/'+tahun+'', function(data) {
 
         var rangking = data.data_rangking
         // console.log(rangking)

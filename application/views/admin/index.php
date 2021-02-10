@@ -53,7 +53,7 @@
   ======================================================== -->
 </head>
 
-<body style="transform-origin: 0 0">
+<body style="transform-origin: 0 0; transform:scale(1);">
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center bg">
     <div class="container">
@@ -65,6 +65,11 @@
         </div>
 
         <span class="typed" data-aos="fade-in" data-typed-items="<?php foreach($getWarning as $warning) {echo $warning["info"];} ?>"></span><a onclick="myInfo()" class="fa fa-edit"></a>
+        <select name="tahun" id="tahun">
+          <option value="">Tahun</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+        </select>
 
         <nav class="nav-menu d-none d-lg-block">
           <ul>
@@ -178,7 +183,7 @@
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="<?= base_url('assets/vendor/jquery/jquery.min.js') ?>"></script>
+  <!-- <script src="<?= base_url('assets/vendor/jquery/jquery.min.js') ?>"></script> -->
   <script src="<?= base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
   <script src="<?= base_url('assets/vendor/jquery.easing/jquery.easing.min.js') ?>"></script>
   <script src="<?= base_url('assets/vendor/php-email-form/validate.js') ?>"></script>
@@ -189,7 +194,7 @@
   <script src="<?= base_url('assets/vendor/owl.carousel/owl.carousel.min.js') ?>"></script>
   <script src="<?= base_url('assets/vendor/aos/aos.js') ?>"></script>
 
-  <script src="<?= base_url('assets/datatable/datatables/jquery.dataTables.js') ?>"></script>
+  <!-- <script src="<?= base_url('assets/datatable/datatables/jquery.dataTables.js') ?>"></script> -->
 
   <!-- Template Main JS File -->
   <script src="<?= base_url('assets/js/main.js') ?>"></script>
@@ -200,32 +205,36 @@
 
   <script>
   // $(document).ready(function() {
-    $(() => {
+    // $(() => {
 
     
 
 
-    $('#table_resi_detail_admin').DataTable({
-      "processing": true, 
-        "serverSide": true, 
-        "order": [], //Initial no order.
+    // $('#table_resi_detail_admin').DataTable(
+      // {
+      // "processing": true, 
+      //   "serverSide": true, 
+      //   "order": [], //Initial no order.
  
-        "ajax": {
-            "url": site_url = "http://"+ window.location.host +"/cek-paketan-ci/Admin/ajax_list",
-            "type": "POST"
-        },
-        //Set column
-        "columnDefs": [
-        { 
-            "targets": [ 0 ], //first column / numbering column
-            "orderable": false, //set not orderable
-        },
-        ],
-      }); 
+      //   "ajax": {
+      //       "url": site_url = "http://"+ window.location.host +"/cek-paketan-ci/Admin/ajax_list",
+      //       "type": "POST"
+      //   },
+      //   //Set column
+      //   "columnDefs": [
+      //   { 
+      //       "targets": [ 0 ], //first column / numbering column
+      //       "orderable": false, //set not orderable
+      //   },
+      //   ],
+      // }
+    // ); 
       
 
 // })
-})
+// })
+
+
 
 
   </script>

@@ -66,6 +66,8 @@
 
     <input type="hidden" id="tgl_ambil" value="<?= date('d-m-Y H:i:s')?>">
 
+    <script src="<?= base_url('assets/datatable/datatables/jquery.dataTables.js') ?>"></script>
+
 <script >
 
     // $(document).ready(function(){
@@ -90,6 +92,26 @@
         }else{
             return 0;
         }
-    }
+    };
+
+    $('#table_resi_detail_admin').DataTable(
+      {
+      "processing": true, 
+        "serverSide": true, 
+        "order": [], //Initial no order.
+ 
+        "ajax": {
+            "url": site_url = "http://"+ window.location.host +"/cek-paketan-ci/Admin/ajax_list",
+            "type": "POST"
+        },
+        //Set column
+        "columnDefs": [
+        { 
+            "targets": [ 0 ], //first column / numbering column
+            "orderable": false, //set not orderable
+        },
+        ],
+      }
+    ); 
     
 </script>

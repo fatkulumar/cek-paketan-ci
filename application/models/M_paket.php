@@ -68,6 +68,26 @@
             ->get($this->table);
         }
 
+        function grafikPaket($tahun)
+        {
+           return $query = $this->db
+           ->select('nama_paket,jenis_kirim,tahun,hp,penerima, count(*) as jumlah')
+           ->group_by('nama_paket')
+           ->where('tahun',$tahun)
+           ->get($this->table);
+            // return $this->db->query("SELECT nama_paket,jenis_kirim,tahun,hp, count(*) as jumlah FROM `tb_paket` where tahun='$tahun' group by nama_paket");
+        }
+        //grafik penerima melalui json grafik
+        function grafikPenerimaJson($tahun)
+        {
+            return $query = $this->db
+            ->select('penerima, count(*) as jumlah')
+            ->group_by('penerima')
+            ->where('tahun',$tahun)
+            ->get($this->table);
+        }
+        
+        //grafik penerima melalui index
         function grafikPenerima()
         {
             return $query = $this->db

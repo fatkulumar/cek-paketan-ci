@@ -62,7 +62,7 @@ class User extends CI_Controller {
 		$this->load->view('user/index', $data);
 	}
 
-	public function grafikNamaPaket()
+	public function grafikNamaPaket($tahun)
 	{
 		header("Access-Control-Allow-Origin: *");
 		header("Access-Control-Allow-Credentials: true");
@@ -71,7 +71,7 @@ class User extends CI_Controller {
 		header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
 		header('Content-Type: application/json');
 		
-		$data['nama_paket'] = $this->m_paket->grafikNamaPaket()->result_array();
+		$data['nama_paket'] = $this->m_paket->grafikPaket($tahun)->result_array();
 		foreach($data['nama_paket'] as $row){
 
 			// $jenis=$row['jenis_kirim'];
@@ -113,7 +113,7 @@ class User extends CI_Controller {
 		$data["data_rangking"] = $data_rangking;
 			
 		}
-
+		$data['tahun'] = $tahun;
 		$data['jumlah_nama_paket'] = $this->m_paket->grafikNamaPaket()->num_rows();
 
 		// $rangking = array();
@@ -143,9 +143,17 @@ class User extends CI_Controller {
             $row[] = $paket->hp;
             $row[] = $paket->penerima;
             $row[] = $paket->jenis_kirim;
-            $row[] = $paket->status_ambil;
- 
+            if($paket->status_ambil==''){
+
+				$btn_status="<td><a class='btn btn-danger btn-sm' href='javascript:void(0)'>Belum Diambil</a></td>";
+			}else{
+
+				$btn_status="<button class='btn btn-success btn-sm' disabled>Sudah Diambil</button><div><span>$paket->tgl_ambil</span>";
+			}
+			$row[]=$btn_status;
+
             $data[] = $row;
+			
         }
  
         $output = array(

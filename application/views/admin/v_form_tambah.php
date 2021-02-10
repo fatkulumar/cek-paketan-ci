@@ -58,7 +58,7 @@
 
                 <div>
                     <!-- <button id="add" class="btn btn-success btn-sm" type="submit" name="add">Tambah Resi</button> -->
-                    <a class="btn btn-sm btn-danger" onclick="formcheck()" id="add">Tambah Data</a>
+                    <a class="btn btn-sm btn-danger"  id="add">Tambah Data</a>
                 </div>
 
             </form>
@@ -68,28 +68,25 @@
     </div>
 
     
-
+    <!-- <script src="<?= base_url('assets/vendor/jquery/jquery.min.js') ?>"></script> -->
 <script>
 
-		var data = [
-        <?= json_encode($data_paket) ?>
-    ];
-    
-		$("#nama_paket").autocomplete({
-		  source: data
-    });
-    
-    var data_hp = [
-        <?= json_encode($data_hp) ?>
-		];
-		$("#no_hp").autocomplete({
-		  source: data_hp
-		});
+  var data = <?= json_encode($nama_pk) ?>;
+  $("#nama_paket").autocomplete({
+    source: data
+  });
+  
+  var data_hp = <?= json_encode($hp_pk) ?>;
+  $("#no_hp").autocomplete({
+    source: data_hp
+  });
 
   $('#add').on('click', function(){ 
+    // alert('dad')
     var nama_paket = $('#nama_paket').val()
     var no_hp = $('#no_hp').val()
     var data = $('#tambah').serialize()
+    // alert(data)
     var validasi_angka = /^[0-9]+$/;
 
 
