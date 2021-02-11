@@ -10,8 +10,8 @@
   <meta content="simpas" name="keywords"> 
 
   <!-- Favicons -->
-  <link href="<?= base_url('assets/img/logo_s.png')?>" rel="icon">
-  <link href="<?= base_url('assets/img/logo_s.png')?>" rel="apple-touch-icon">
+  <link href="<?= base_url('assets/img/simpas.png')?>" rel="icon">
+  <link href="<?= base_url('assets/img/simpas.png')?>" rel="apple-touch-icon">
 
   <meta property="og:image" content="<?= base_url('assets/img/logo-sympas-lite.png')?>">
   <link itemprop="thumbnailUrl" href="<?= base_url('assets/img/logo-sympas-lite.png')?>">
@@ -53,7 +53,7 @@
   ======================================================== -->
 </head>
 
-<body style="transform-origin: 0 0; transform:scale(1);">
+<body style="transform-origin: 0 0;">
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center bg">
     <div class="container">
@@ -177,7 +177,7 @@
         <a href="https://linkedin.com/in/fatkulumar" class="linkedin bg-success" target="_blank"><i class="bx bxl-linkedin"></i></a>
         <a href="https://fatkulumar.com/" class="linkedin bg-success" target="_blank"><i class="bx bxl-"></i></a>
       </div>
-    </div>
+    </div> 
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>

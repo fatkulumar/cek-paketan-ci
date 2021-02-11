@@ -248,6 +248,13 @@ class Admin extends CI_Controller {
                 'y' => $jml,
             ];
 
+			$data['cod_counts']=$this->db
+			->select('jenis_kirim, count(*) as jumlah_cod_counts')
+			->get_where('tb_paket',['jenis_kirim'=> "COD", "tahun" => $tahun])->result_array();
+
+			$data['langsung_counts']=$this->db
+			->select('jenis_kirim, count(*) as jumlah_langsung_counts')
+			->get_where('tb_paket',['jenis_kirim'=> "langsung", "tahun" => $tahun])->result_array();
 			
 
 			$data['cod']=$this->db

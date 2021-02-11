@@ -26,8 +26,8 @@
         }
         
     ?>
-
-<section id="counts" class="counts bg-success">
+    <div id="tampil_counts"></div>
+    <section id="counts" class="counts bg-success">
       <div class="container ">
 
         <div class="row counters">
@@ -418,6 +418,8 @@ if(tahun == ""){
 
 //ini jika pilih tahun
 $('#tahun').on('change', function(event) {
+    
+
     var tahun = $('#tahun').val()
 
     if(tahun != "") {
@@ -430,10 +432,15 @@ $('#tahun').on('change', function(event) {
 
     var link = 'http://'+ window.location.host +'/cek-paketan-ci/admin/grafikNamaPaket/'+tahun+''
     $.getJSON(link, function(data) {
+        // console.log(data.cod_counts[0].jumlah_cod_counts)
+        // console.log(data.langsung_counts[0].jumlah_langsung_counts)
+        var counts = "<div class='container'><div class='row counters'><div class='col-lg-6 col-6 text-center'><span data-toggle='counter-up'>"+ data.cod_counts[0].jumlah_cod_counts +"</span><p>COD</p></div><div class='col-lg-6 col-6 text-center'><span data-toggle='counter-up'>"+ data.langsung_counts[0].jumlah_langsung_counts +"</span><p>Langsung</p></div></div></div>"
+
+    $('#counts').html(counts)
         var data_paketan_admin = data.paketan_admin
         var data_paketan_admin_penerima = data.data_admin_penerima
-        console.log(data_paketan_admin)
-        console.log(data_paketan_admin_penerima)
+        // console.log(data_paketan_admin)
+        // console.log(data_paketan_admin_penerima)
         var rangking = data.data_rangking
         // console.log(rangking)
         var nama_paket = data.nama_paket
