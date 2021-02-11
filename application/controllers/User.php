@@ -26,6 +26,7 @@ class User extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->model('M_paket','paket');
 		// $this->load->library('form_validation');
+		date_default_timezone_set('Asia/Jakarta');
 	}
 
 	public function index()
@@ -38,26 +39,26 @@ class User extends CI_Controller {
 		$data['penerima'] = $this->m_paket->grafikPenerima()->result_array();
 		$data['getWarning'] = $this->m_paket->getWarning();
 
-		$rangking = array();
-		$data['peringkat'] = $this->m_paket->peringkat()->result_array();
-		foreach($data['peringkat'] as $rank => $val){
-			$rangking[$val["nama_paket"]] = $val['jumlah'];
-		}
+		// $rangking = array();
+		// $data['peringkat'] = $this->m_paket->peringkat()->result_array();
+		// foreach($data['peringkat'] as $rank => $val){
+		// 	$rangking[$val["nama_paket"]] = $val['jumlah'];
+		// }
 
-		arsort($rangking);
-		$data['rangking'] = $rangking;
+		// arsort($rangking);
+		// $data['rangking'] = $rangking;
 
-		$data_rangking = array();
-		foreach($rangking as $rang => $val){
+		// $data_rangking = array();
+		// foreach($rangking as $rang => $val){
 			
 			
-			$data_rangking[] = [
-				'nama' => $rang,
-				'jumlah' => $val
-			];
-		}
+		// 	$data_rangking[] = [
+		// 		'nama' => $rang,
+		// 		'jumlah' => $val
+		// 	];
+		// }
 
-		$data["data_rangking"] = $data_rangking;
+		// $data["data_rangking"] = $data_rangking;
 
 		$this->load->view('user/index', $data);
 	}
@@ -71,8 +72,16 @@ class User extends CI_Controller {
 		header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
 		header('Content-Type: application/json');
 		
+		$data['paketan_user'] = [];
 		$data['nama_paket'] = $this->m_paket->grafikPaket($tahun)->result_array();
 		foreach($data['nama_paket'] as $row){
+
+			$nama = $row["nama_paket"];
+            $jml = intval($row["jumlah"]);
+            $data['paketan_user'][] = [
+                'name' => $nama,
+                'y' => $jml,
+            ];
 
 			// $jenis=$row['jenis_kirim'];
 			$data['cod']=$this->db
@@ -85,35 +94,35 @@ class User extends CI_Controller {
 			->group_by('nama_paket')
 			->get_where('tb_paket',['jenis_kirim'=> "langsung"])->result_array();
 
-			$data['peringkat']=$this->db
-			->select('nama_paket,jenis_kirim, count(*) as jumlah_langsung')
-			->group_by('nama_paket')
-			->get_where('tb_paket',['jenis_kirim'=> "langsung"])->result_array();
+			// $data['peringkat']=$this->db
+			// ->select('nama_paket,jenis_kirim, count(*) as jumlah_langsung')
+			// ->group_by('nama_paket')
+			// ->get_where('tb_paket',['jenis_kirim'=> "langsung"])->result_array();
 
-			$rangking = array();
-		$data['peringkat'] = $this->m_paket->peringkat()->result_array();
-		foreach($data['peringkat'] as $rank => $val){
-			$rangking[$val["nama_paket"]] = $val['jumlah'];
-		}
+			// $rangking = array();
+			// $data['peringkat'] = $this->m_paket->peringkat()->result_array();
+			// 	foreach($data['peringkat'] as $rank => $val){
+			// 		$rangking[$val["nama_paket"]] = $val['jumlah'];
+			// }
 
-		arsort($rangking);
-		$data['rangking'] = $rangking;
+			// arsort($rangking);
+			// $data['rangking'] = $rangking;
 
-		$data_rangking = array();
-		$no = 0;
-		foreach($rangking as $rang => $val){
-			$no++;
-			if($no == 4){break;	}
-			$data_rangking[] = [
-				'nama' => $rang,
-				'jumlah' => $val
-			];
-		}
+			// $data_rangking = array();
+			// $no = 0;
+			// foreach($rangking as $rang => $val){
+			// 	$no++;
+			// 	if($no == 4){break;	}
+			// 		$data_rangking[] = [
+			// 			'nama' => $rang,
+			// 			'jumlah' => $val
+			// 		];
+			// }
 
-		$data["data_rangking"] = $data_rangking;
+			// $data["data_rangking"] = $data_rangking;
 			
 		}
-		$data['tahun'] = $tahun;
+		// $data['tahun'] = $tahun;
 		$data['jumlah_nama_paket'] = $this->m_paket->grafikNamaPaket()->num_rows();
 
 		// $rangking = array();

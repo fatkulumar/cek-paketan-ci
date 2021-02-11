@@ -10,8 +10,8 @@
   <meta content="simpas" name="keywords"> 
 
   <!-- Favicons -->
-  <link href="<?= base_url('assets/img/simpas.png')?>" rel="icon">
-  <link href="<?= base_url('assets/img/simpas.png')?>" rel="apple-touch-icon">
+  <link href="<?= base_url('assets/img/logo_s.png')?>" rel="icon">
+  <link href="<?= base_url('assets/img/logo_s.png')?>" rel="apple-touch-icon">
 
   <meta property="og:image" content="<?= base_url('assets/img/logo-sympas-lite.png')?>">
   <link itemprop="thumbnailUrl" href="<?= base_url('assets/img/logo-sympas-lite.png')?>">

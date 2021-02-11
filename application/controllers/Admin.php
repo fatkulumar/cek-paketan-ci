@@ -33,9 +33,9 @@ class Admin extends CI_Controller {
 	{
 		$this->output->delete_cache();
 		$data['nama_paket'] = $this->m_paket->grafikNamaPaket()->result_array();
-		$data['hitungCod'] = $this->m_paket->hitungCod();
-		$data['hitungLangsung'] = $this->m_paket->hitungLangsung();
-		$data['penerima'] = $this->m_paket->grafikPenerima()->result_array();
+		// $data['hitungCod'] = $this->m_paket->hitungCod();
+		// $data['hitungLangsung'] = $this->m_paket->hitungLangsung();
+		// $data['penerima'] = $this->m_paket->grafikPenerima()->result_array();
 
 		$data['data_asc'] = $this->m_paket->tampil_data_asc();
 		$data['data_desc'] = $this->m_paket->tampil_data_desc();
@@ -159,20 +159,20 @@ class Admin extends CI_Controller {
 		redirect('admin/index');
 	}
 
-	public function peringkat()
-	{
-		$rangking = array();
-		$peringkat = $this->m_paket->peringkat()->result_array();
-		foreach($peringkat as $rank){
-			echo $rangking[] =  $rank["jumlah"];
-			echo "<br>";
-		}
+	// public function peringkat()
+	// {
+	// 	$rangking = array();
+	// 	$peringkat = $this->m_paket->peringkat()->result_array();
+	// 	foreach($peringkat as $rank){
+	// 		echo $rangking[] =  $rank["jumlah"];
+	// 		echo "<br>";
+	// 	}
 
-		//  echo sort($peringkat);
+	// 	//  echo sort($peringkat);
 
-		// echo $angka = implode(",", $rangking);
-		echo sort($peringkat);
-	}
+	// 	// echo $angka = implode(",", $rangking);
+	// 	echo sort($peringkat);
+	// }
 
 	private function bot_telegram($data)
 	{
@@ -220,11 +220,11 @@ class Admin extends CI_Controller {
         }
  
         $output = array(
-                        "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->paket->count_all(),
-                        "recordsFiltered" => $this->paket->count_filtered(),
-                        "data" => $data,
-                );
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->paket->count_all(),
+			"recordsFiltered" => $this->paket->count_filtered(),
+			"data" => $data,
+		);
         //output to json format
         echo json_encode($output);
 	}
@@ -267,10 +267,10 @@ class Admin extends CI_Controller {
 			->group_by('nama_paket')
 			->get_where('tb_paket',['jenis_kirim'=> "langsung"])->result_array();
 
-			$data['peringkat']=$this->db
-			->select('nama_paket,jenis_kirim, count(*) as jumlah_langsung')
-			->group_by('nama_paket')
-			->get_where('tb_paket',['jenis_kirim'=> "langsung"])->result_array();
+			// $data['peringkat']=$this->db
+			// ->select('nama_paket,jenis_kirim, count(*) as jumlah_langsung')
+			// ->group_by('nama_paket')
+			// ->get_where('tb_paket',['jenis_kirim'=> "langsung"])->result_array();
 
 			$rangking = array();
 			$data['peringkat'] = $this->m_paket->peringkat()->result_array();
@@ -332,16 +332,16 @@ class Admin extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	public function auto_nama_paket()
-	{
-		$data['nama_paketan'] = [];
-		$data['nama_paket'] = $this->m_paket->grafikNamaPaket()->result_array();
-		foreach($data['nama_paket'] as $row){
-			$nama = $row['nama_paket'];
-			$data['nama_paketan'][] = [
-				'nama_paket' => $nama
-			];
-		}
-		echo json_encode($data);
-	}
+	// public function auto_nama_paket()
+	// {
+	// 	$data['nama_paketan'] = [];
+	// 	$data['nama_paket'] = $this->m_paket->grafikNamaPaket()->result_array();
+	// 	foreach($data['nama_paket'] as $row){
+	// 		$nama = $row['nama_paket'];
+	// 		$data['nama_paketan'][] = [
+	// 			'nama_paket' => $nama
+	// 		];
+	// 	}
+	// 	echo json_encode($data);
+	// }
 }

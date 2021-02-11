@@ -280,7 +280,7 @@ $(document).ready(function() {
             series: [{
                 name: 'Persentase',
                 colorByPoint: true,
-                data: <?php echo json_encode($data)?>
+                data: data.paketan_user
             //     [
                 //     {
                 //     name: 'Chrome',

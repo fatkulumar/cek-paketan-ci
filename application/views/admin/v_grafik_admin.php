@@ -3,7 +3,8 @@
 <!-- <script src="<?= base_url('assets/highcharts/code/export-data.js') ?>"></script> -->
 <!-- <script src="<?= base_url('assets/highcharts/code/exporting.js') ?>"></script> -->
 
-<?php
+<!-- php komentari aja gak guna -->
+<!-- <?php
         
         $data = [];
         foreach($nama_paket as $pk){
@@ -25,7 +26,7 @@
             ];
         }
         
-    ?>
+    ?> -->
     <div id="tampil_counts"></div>
     <section id="counts" class="counts bg-success">
       <div class="container ">
@@ -436,7 +437,8 @@ $('#tahun').on('change', function(event) {
         // console.log(data.langsung_counts[0].jumlah_langsung_counts)
         var counts = "<div class='container'><div class='row counters'><div class='col-lg-6 col-6 text-center'><span data-toggle='counter-up'>"+ data.cod_counts[0].jumlah_cod_counts +"</span><p>COD</p></div><div class='col-lg-6 col-6 text-center'><span data-toggle='counter-up'>"+ data.langsung_counts[0].jumlah_langsung_counts +"</span><p>Langsung</p></div></div></div>"
 
-    $('#counts').html(counts)
+        $('#counts').html(counts)
+        
         var data_paketan_admin = data.paketan_admin
         var data_paketan_admin_penerima = data.data_admin_penerima
         // console.log(data_paketan_admin)

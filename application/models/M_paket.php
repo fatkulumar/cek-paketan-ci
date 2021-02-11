@@ -59,7 +59,7 @@
         {
             return $this->db->get_where($this->table, ['jenis_kirim' => 'Langsung'])->num_rows();
         }
-
+        //mencari nama paket
         function grafikNamaPaket()
         {
             return $query = $this->db
@@ -67,7 +67,7 @@
             ->group_by('nama_paket')
             ->get($this->table);
         }
-
+        //mencari nama paket berdasarkan tahun
         function grafikPaket($tahun)
         {
            return $query = $this->db
