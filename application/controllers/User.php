@@ -174,4 +174,16 @@ class User extends CI_Controller {
         //output to json format
         echo json_encode($output);
     }
+
+	function grafik_pisah()
+	{
+		$this->output->delete_cache();
+		$data['nama_paket'] = $this->m_paket->grafikNamaPaket()->result_array();
+		$data['data_asc'] = $this->m_paket->tampil_data_asc(); 
+		$data['hitungCod'] = $this->m_paket->hitungCod();
+		$data['hitungLangsung'] = $this->m_paket->hitungLangsung();
+		$data['penerima'] = $this->m_paket->grafikPenerima()->result_array();
+		$data['getWarning'] = $this->m_paket->getWarning();
+		$this->load->view('user/grafik_pisah_user', $data);
+	}
 }

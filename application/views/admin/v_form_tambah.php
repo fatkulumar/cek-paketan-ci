@@ -71,6 +71,21 @@
     <!-- <script src="<?= base_url('assets/vendor/jquery/jquery.min.js') ?>"></script> -->
 <script>
 
+  
+  $('#no_hp').on('change', function() {
+    var no_hp = $('#no_hp').val()
+    console.log(no_hp)
+    $.ajax({
+      url: "<?= base_url('admin/filter_hp')?>",
+      type: "POST",
+      data: {no_hp: no_hp},
+      dataType: "JSON",
+      success: function(data) {
+        $('#nama_paket').val(data.nama_hp.nama_paket)
+      }
+    })
+  })
+
   var data = <?= json_encode($nama_pk) ?>;
   $("#nama_paket").autocomplete({
     source: data

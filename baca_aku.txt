@@ -1,0 +1,1 @@
+sesuaikan link di grafik pisah karena pemanggilan menggunakan ajax dan di bagian table karena menggunakan datatable

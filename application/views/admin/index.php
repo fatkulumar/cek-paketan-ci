@@ -37,13 +37,16 @@
   <script src="<?= base_url('assets/awesome.js') ?>"></script>
 
   <!-- Template Main CSS File -->
-  <!-- <link href="<?= base_url('assets/css/style.css') ?>" rel="stylesheet"> -->
-  <link href="<?= base_url('assets/css/style_copy5.css') ?>" rel="stylesheet">
+  <link href="<?= base_url('assets/css/style_copy6.css') ?>" rel="stylesheet">
 
   <link rel="stylesheet" href="<?= base_url('assets/datatable/css/jquery.dataTables.min.css') ?>">
   
 
   <script src="<?= base_url('assets/vendor/jquery/jquery.min.js') ?>"></script>
+
+  <!-- font bebas-neue -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"> 
 
   <!-- =======================================================
   * Template Name: Bethany - v2.2.0
@@ -59,12 +62,13 @@
     <div class="container">
       <div class="header-container d-flex align-items-center">
         <div class="logo mr-auto bg-success">
-          <h1 class="text-light"><a href=""><img src="<?= base_url('assets/img/logo_s.png') ?>" alt="simpas"></a></h1>
+          <h1 class="text-light"><a href="<?= base_url('admin') ?>"><img src="<?= base_url('assets/img/logo_s.png') ?>" alt="simpas"></a></h1>
           <!-- Uncomment below if you prefer to use an image logo -->
           <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>
-
-        <span class="typed" data-aos="fade-in" data-typed-items="<?php foreach($getWarning as $warning) {echo $warning["info"];} ?>"></span><a onclick="myInfo()" class="fa fa-edit"></a>
+        <!-- text berjalan  -->
+        <div class="running-text"><marquee behavior="" direction="left"><?php foreach($getWarning as $warning) {echo $warning["info"];} ?></marquee></div>
+        <a onclick="myInfo()" class="fa fa-edit"></a>
         <select name="tahun" id="tahun">
           <option value="">Tahun</option>
           <option value="2020">2020</option>
@@ -74,8 +78,8 @@
         <nav class="nav-menu d-none d-lg-block">
           <ul>
             <li class="active"><a href="#header">Home</a></li>
-            <li><a href="#table">Table</a></li>
-            <li><a href="#grafik">Grafik</a></li>
+            <!-- <li><a href="#table">Table</a></li> -->
+            <li><a href="<?= base_url('admin/grafik_pisah')?>">Grafik</a></li>
             <!-- <li class="get-started"><a href="#about">Get Started</a></li> -->
           </ul>
         </nav><!-- .nav-menu -->
@@ -118,11 +122,11 @@
       <div class="row">
         <div class="col-md-6 mb-5">
           <?php $this->load->view('admin/v_form_tambah') ?>
-        </div>
+        </div> 
         <div class="col-md-6">
           <?php $this->load->view('admin/v_table_admin') ?>
         </div>
-      </div>
+      </div> 
     </div>
   </section><!-- End Hero -->
 	
@@ -139,18 +143,19 @@
 
     <!-- ======= Counts Section ======= -->
     
-  <main id="main">
+  <!-- <main id="main"> -->
 	
     <!-- ======= About Section ======= -->
-    <section id="grafik" class="about">
+    <!-- <section id="grafik" class="about">
       <div class="container">
-        <?php $this->load->view('admin/v_grafik_admin')?>
       </div>
-    </section><!-- End About Section -->
+    </section> -->
+    <!-- End About Section -->
 
     <!-- ======= Counts Section ======= -->
     
-  </main><!-- End #main -->
+  <!-- </main> -->
+  <!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
@@ -200,8 +205,8 @@
   <script src="<?= base_url('assets/js/main.js') ?>"></script>
   
   <!-- typed -->
-  <script src="<?= base_url('assets/typed/typed.js/typed.min.js')?>"></script>
-  <script src="<?= base_url('assets/typed/main.js')?>"></script>
+  <!-- <script src="<?= base_url('assets/typed/typed.js/typed.min.js')?>"></script>
+  <script src="<?= base_url('assets/typed/main.js')?>"></script> -->
 
   <script>
   // $(document).ready(function() {

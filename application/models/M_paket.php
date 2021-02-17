@@ -113,11 +113,12 @@
             ->get($this->table_other)->result_array();
         }
 
-        function peringkat()
+        function peringkat($tahun)
         {
             return $this->db
             ->select('nama_paket, count(*) as jumlah')
             ->group_by('nama_paket')
+            ->where('tahun', $tahun)
             ->get($this->table);
         }
 
@@ -189,6 +190,14 @@
         {
             $this->db->from($this->table);
             return $this->db->count_all_results();
+        }
+
+        function filter_hp($hp)
+        {
+            return $this->db
+            ->select('nama_paket')
+            ->where('hp', $hp)
+            ->get($this->table);
         }
 
     }

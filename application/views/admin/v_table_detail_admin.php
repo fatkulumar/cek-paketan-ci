@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+
 <!-- Content Header (Page header) -->
     <div class="row">
         <div class="col-lg-12">
@@ -66,6 +68,7 @@
 
     <input type="hidden" id="tgl_ambil" value="<?= date('d-m-Y H:i:s')?>">
 
+    <!-- <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script> -->
     <script src="<?= base_url('assets/datatable/datatables/jquery.dataTables.js') ?>"></script>
 
 <script >
@@ -90,27 +93,35 @@
                 }
             })
         }else{
-            return 0;
+            return;
         }
     };
+
+    
+    $('#filter_status_ambil').on('change', function(event) {
+        event.preventDefault()
+        var html = "<table id='table_resi_detail_admin' class='table table-striped'><thead><tr><th>Tanggal Terima</th> <th>Nama</th><th>HP</th><th>Penerima</th><th>Jenis</th><th>Pengambil</th><th>Status</th><th>Aksi</th></tr><tbody><tr><th>Tanggal Terima</th><th>Nama</th><th>HP</th><th>Penerima</th><th>Jenis</th><th>Pengambil</th><th>Status</th><th>Aksi</th></tr></tbody></table>"
+        $('.table').html(html)
+                         
+    })
 
     $('#table_resi_detail_admin').DataTable(
       {
       "processing": true, 
         "serverSide": true, 
-        "order": [], //Initial no order.
+        // "order": [], //Initial no order.
  
         "ajax": {
             "url": site_url = "http://"+ window.location.host +"/cek-paketan-ci/Admin/ajax_list",
             "type": "POST"
         },
         //Set column
-        "columnDefs": [
-        { 
-            "targets": [ 0 ], //first column / numbering column
-            "orderable": false, //set not orderable
-        },
-        ],
+        // "columnDefs": [
+        // { 
+        //     "targets": [ 0 ], //first column / numbering column
+        //     "orderable": false, //set not orderable
+        // },
+        // ],
       }
     ); 
     

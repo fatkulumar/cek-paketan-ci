@@ -70,7 +70,7 @@
         <div class="mb-5" id="duta_paket" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
         <ul>
             <!-- grafik duta penerima -->
-            <div class="mb-5" id="duta_penerima" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        <div class="mb-5" id="duta_penerima" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
         </ul>
 
         <p id="peringkat" class="font-italic float: right pl-4">
@@ -118,6 +118,10 @@ if(tahun == ""){
     var tahun = new Date().getFullYear()
     var link = 'http://'+ window.location.host +'/cek-paketan-ci/admin/grafikNamaPaket/'+tahun+''
     $.getJSON(link, function(data) {
+        // var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+        // if(!isChrome){
+        //     alert("Supaya Menikmati Fitur Gunakan Chrome Terbaru")
+        // }
         var rangking = data.data_rangking
         // console.log(rangking)
         var nama_paket = data.nama_paket
@@ -433,6 +437,10 @@ $('#tahun').on('change', function(event) {
 
     var link = 'http://'+ window.location.host +'/cek-paketan-ci/admin/grafikNamaPaket/'+tahun+''
     $.getJSON(link, function(data) {
+        // var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+        // if(!isChrome){
+        //     alert("Supaya Menikmati Fitur Gunakan Chrome Terbaru")
+        // }
         // console.log(data.cod_counts[0].jumlah_cod_counts)
         // console.log(data.langsung_counts[0].jumlah_langsung_counts)
         var counts = "<div class='container'><div class='row counters'><div class='col-lg-6 col-6 text-center'><span data-toggle='counter-up'>"+ data.cod_counts[0].jumlah_cod_counts +"</span><p>COD</p></div><div class='col-lg-6 col-6 text-center'><span data-toggle='counter-up'>"+ data.langsung_counts[0].jumlah_langsung_counts +"</span><p>Langsung</p></div></div></div>"
@@ -441,12 +449,9 @@ $('#tahun').on('change', function(event) {
         
         var data_paketan_admin = data.paketan_admin
         var data_paketan_admin_penerima = data.data_admin_penerima
-        // console.log(data_paketan_admin)
-        // console.log(data_paketan_admin_penerima)
         var rangking = data.data_rangking
         // console.log(rangking)
         var nama_paket = data.nama_paket
-        // document.write(nama_paket)
         var langsung = data.langsung
         var cod = data.cod
         var nama_paketan = []
@@ -454,21 +459,6 @@ $('#tahun').on('change', function(event) {
         var jenis_kirim = []
         var jumlah_kirim_cod = []
         var jumlah_kirim_langsung = []
-
-        // var data_duta_paketan_name = []
-        // var data_duta_paketan_y = []
-        // $(data_paketan_admin).each(function(i){
-        //     data_duta_paketan_name.push(data_paketan_admin[i].name)
-        //     data_duta_paketan_y.push(data_paketan_admin[i].y)
-        // })
-
-        // var data_duta_paketan_nama_penerima = []
-        // var data_duta_paketan_jumlah_penerima = []
-        // $(data_paketan_admin_penerima).each(function(i){
-        //     data_duta_paketan_nama_penerima.push(data_paketan_admin_penerima[i].penerima)
-        //     data_duta_paketan_jumlah_penerima.push(data_paketan_admin_penerima[i].jumlah)
-        //     // alert(i)
-        // })
 
         $(langsung).each(function(ia){
             jumlah_kirim_langsung.push(langsung[ia].jumlah_langsung);

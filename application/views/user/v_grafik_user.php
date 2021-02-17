@@ -91,6 +91,10 @@ $(document).ready(function() {
     var tahun = new Date().getFullYear()
 //serbver host
     $.getJSON('http://'+ window.location.host +'/cek-paketan-ci/user/grafikNamaPaket/'+tahun+'', function(data) {
+        // var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+        // if(!isChrome){
+        //     alert("Supaya Menikmati Fitur Gunakan Chrome Terbaru")
+        // }
 
         var rangking = data.data_rangking
         // console.log(rangking)

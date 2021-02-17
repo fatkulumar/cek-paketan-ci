@@ -33,8 +33,8 @@ class Admin extends CI_Controller {
 	{
 		$this->output->delete_cache();
 		$data['nama_paket'] = $this->m_paket->grafikNamaPaket()->result_array();
-		// $data['hitungCod'] = $this->m_paket->hitungCod();
-		// $data['hitungLangsung'] = $this->m_paket->hitungLangsung();
+		$data['hitungCod'] = $this->m_paket->hitungCod();
+		$data['hitungLangsung'] = $this->m_paket->hitungLangsung();
 		// $data['penerima'] = $this->m_paket->grafikPenerima()->result_array();
 
 		$data['data_asc'] = $this->m_paket->tampil_data_asc();
@@ -273,7 +273,7 @@ class Admin extends CI_Controller {
 			// ->get_where('tb_paket',['jenis_kirim'=> "langsung"])->result_array();
 
 			$rangking = array();
-			$data['peringkat'] = $this->m_paket->peringkat()->result_array();
+			$data['peringkat'] = $this->m_paket->peringkat($tahun)->result_array();
 			foreach($data['peringkat'] as $rank => $val){
 			$rangking[$val["nama_paket"]] = $val['jumlah'];
 		}
@@ -344,4 +344,24 @@ class Admin extends CI_Controller {
 	// 	}
 	// 	echo json_encode($data);
 	// }
+
+	function filter_hp(){
+		$hp = $this->input->post('no_hp');
+		$data["nama_hp"] = $this->m_paket->filter_hp($hp)->row(); 
+		echo json_encode($data);
+	}
+
+	function grafik_pisah()
+	{
+		$this->output->delete_cache();
+		$data['nama_paket'] = $this->m_paket->grafikNamaPaket()->result_array();
+		$data['hitungCod'] = $this->m_paket->hitungCod();
+		$data['hitungLangsung'] = $this->m_paket->hitungLangsung();
+		// $data['penerima'] = $this->m_paket->grafikPenerima()->result_array();
+
+		$data['data_asc'] = $this->m_paket->tampil_data_asc();
+		$data['data_desc'] = $this->m_paket->tampil_data_desc();
+		$data['getWarning'] = $this->m_paket->getWarning();
+		$this->load->view('admin/grafik_pisah_admin', $data);
+	}
 }

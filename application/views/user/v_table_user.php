@@ -1,5 +1,5 @@
     <!-- <link rel="stylesheet" href="<?= base_url('assets/datatable//css/jquery.dataTables.min.css') ?>"> -->
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
     <!-- Content Header (Page header) -->
     <div class="row">
         <div class="col-md-12 mt-2">
@@ -12,7 +12,7 @@
                     </strong>
                 </div> 
                 <div class="card-body">
-
+ 
                     <div class="table table-responsive">   
                       <!-- /.content-header -->
                         <table id="table_resi_user" class="table table-striped">
@@ -77,7 +77,7 @@
         "columnDefs": [
         { 
             "targets": [ 0 ], //first column / numbering column
-            "orderable": false, //set not orderable
+            "orderable": true, //set not orderable
         },
         ],
     }
